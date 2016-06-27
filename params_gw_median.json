@@ -1,0 +1,226 @@
+{
+    "SCI": {
+        "Prevalence/ intensity adjustment": {
+            "dist": "const", 
+            "val": 0.19
+        }, 
+        "Cost per person dewormed": {
+            "dist": "const", 
+            "val": 0.53
+        }, 
+        "Proportion of deworming going to children": {
+            "dist": "const", 
+            "val": 0.75
+        }, 
+        "Leverage (dollar of impact per dollar spent)": {
+            "dist": "const", 
+            "val": 1.0
+        }, 
+        "Adjustment for benefit varying by treatment frequency": {
+            "dist": "const", 
+            "val": 1.0
+        }
+    }, 
+    "Cash": {
+        "Percentage of transfers invested": {
+            "dist": "const", 
+            "val": 0.5
+        }, 
+        "Large transfer size, USD": {
+            "dist": "const", 
+            "val": 1085
+        }, 
+        "Size of transfer": {
+            "dist": "const", 
+            "val": 1000.0
+        }, 
+        "Average family size": {
+            "dist": "const", 
+            "val": 4.7
+        }, 
+        "Control group household monthly consumption, USD PPP": {
+            "dist": "const", 
+            "val": 157.4
+        }, 
+        "Transfers as a percentage of total cost": {
+            "dist": "const", 
+            "val": 0.808
+        }, 
+        "Duration of benefits in years": {
+            "dist": "const", 
+            "val": 20.0
+        }, 
+        "ROI of cash transfers": {
+            "dist": "const", 
+            "val": 0.19
+        }
+    }, 
+    "Shared": {
+        "DALYs per life": {
+            "dist": "const", 
+            "val": 36.53
+        }, 
+        "1 DALY is equivalent to increasing ln(income) by one unit for how many years": {
+            "dist": "const", 
+            "val": 3.0
+        }, 
+        "Short term health benefits, in DALY terms": {
+            "dist": "const", 
+            "val": 0.001760818
+        }, 
+        "Cap adjustment at intuitive maximum": {
+            "dist": "const", 
+            "val": 0
+        }, 
+        "Discount rate": {
+            "dist": "const", 
+            "val": 0.05
+        }, 
+        "Intuitive maximum adjustment": {
+            "dist": "const", 
+            "val": 0.05
+        }
+    }, 
+    "DtW": {
+        "Prevalence/ intensity adjustment": {
+            "dist": "const", 
+            "val": 0.25
+        }, 
+        "Cost per person dewormed": {
+            "dist": "const", 
+            "val": 0.51
+        }, 
+        "Proportion of deworming going to children": {
+            "dist": "const", 
+            "val": 1.0
+        }, 
+        "Leverage (dollar of impact per dollar spent)": {
+            "dist": "const", 
+            "val": 1.07
+        }, 
+        "Adjustment for benefit varying by treatment frequency": {
+            "dist": "const", 
+            "val": 0.81
+        }
+    }, 
+    "Deworming": {
+        "Number of household members that benefit": {
+            "dist": "const", 
+            "val": 1.44
+        }, 
+        "Years of deworming treatment in Miguel and Kremer 2004": {
+            "dist": "const", 
+            "val": 2.41
+        }, 
+        "Short term health benefits of deworming (DALYs per person treated)": {
+            "dist": "const", 
+            "val": 0.001760818
+        }, 
+        "Duration of long term benefits of deworming (years) - also used for iodine": {
+            "dist": "const", 
+            "val": 35.0
+        }, 
+        "Treatment effect of deworming on Ln(total labor earnings)": {
+            "dist": "const", 
+            "val": 0.269
+        }, 
+        "Replicability adjustment for  deworming": {
+            "dist": "const", 
+            "val": 0.6
+        }, 
+        "Prevalence/intensity ratio between M&K and short term health benefit observations": {
+            "dist": "const", 
+            "val": 2.0
+        }, 
+        "External validity of deworming research": {
+            "dist": "const", 
+            "val": 0.5421
+        }, 
+        "Proportion of dewormed children that benefit from long term gains": {
+            "dist": "const", 
+            "val": 0.3
+        }, 
+        "% of years of childhood in which deworming is helpful for development": {
+            "dist": "const", 
+            "val": 0.75
+        }
+    }, 
+    "Bednets": {
+        "Percent of population under 5": {
+            "dist": "const", 
+            "val": 0.179
+        }, 
+        "Cost per ITN distributed (including delivery)": {
+            "dist": "const", 
+            "val": 5.3
+        }, 
+        "Under 5 all mortality rate 2015 (per 1000)": {
+            "dist": "const", 
+            "val": 77.0
+        }, 
+        "Pre-existing ITN ownership: all": {
+            "dist": "const", 
+            "val": 0.57
+        }, 
+        "Percent of population aged 5-14": {
+            "dist": "const", 
+            "val": 0.3017
+        }, 
+        "Relative value of year of deworming treatment to development benefits from year of bednet coverage": {
+            "dist": "const", 
+            "val": 2.0
+        }, 
+        "Impact of insecticide resistance": {
+            "dist": "const", 
+            "val": 0.2
+        }, 
+        "Pre-existing ITN ownership: all (from AMF)": {
+            "dist": "const", 
+            "val": 0.12
+        }, 
+        "People covered per LLIN": {
+            "dist": "const", 
+            "val": 1.8
+        }, 
+        "Under 5 all mortality rate 1995 in the countries where RCT studies were done -  Burkina Faso, Gambia, Ghana, and Kenya (per 1000)": {
+            "dist": "const", 
+            "val": 142.25
+        }, 
+        "% of impact of ITNs coming from community-wide effects": {
+            "dist": "const", 
+            "val": 0.5
+        }, 
+        "Total amount spent": {
+            "dist": "const", 
+            "val": 1000000
+        }, 
+        "Deaths averted per protected child under 5": {
+            "dist": "const", 
+            "val": 0.00553
+        }, 
+        "Pre-existing ITN ownership: children aged 5-14 (from DHS)": {
+            "dist": "const", 
+            "val": 0.44
+        }, 
+        "Wastage": {
+            "dist": "const", 
+            "val": 0.05
+        }, 
+        "Decrease 2004-2015 attributed to ITNs": {
+            "dist": "const", 
+            "val": 0.25
+        }, 
+        "Under 5 all mortality rate 2004 (per 1000)": {
+            "dist": "const", 
+            "val": 127.0
+        }, 
+        "Pre-existing ITN ownership: children under 5 (from DHS)": {
+            "dist": "const", 
+            "val": 0.67
+        }, 
+        "Years of protection per person per LLIN": {
+            "dist": "const", 
+            "val": 2.22
+        }
+    }
+}
