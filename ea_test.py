@@ -165,7 +165,7 @@ if __name__ == '__main__':
     deworming = {}
     deworming['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
         inputs['Deworming']['Treatment effect of deworming on Ln(total labor earnings)']/ \
-        np.power((1.0 + inputs['Shared']['Discount rate']), 10.0)
+        np.power((1.0 + inputs['Shared']['Discount rate']), inputs['Deworming']['Average number of years between deworming and the beginning of long term benefits - also used for iodine'])
     deworming['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))'] = \
         deworming['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)']* \
         (1.0 - 1.0/np.power((1.0 + inputs['Shared']['Discount rate']), inputs['Deworming']['Duration of long term benefits of deworming (years) - also used for iodine']))/ \
@@ -245,14 +245,14 @@ if __name__ == '__main__':
         sci['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #sci_p = stats.lognorm.fit(sci['X as cost effective as Cash'])
     #sci_d = stats.lognorm(*sci_p[:-2], loc=sci_p[-2], scale=sci_p[-1])
-    
     bednets['Proportional increase in consumption per dollar'] = \
-        (1.0/bednets['Cost per person-year of protection, adjusted for insecticide resistance: under-14\'s only'])* \
+        inputs['Bednets']['Alternative funders adjustment']* \
+        ((1.0/bednets['Cost per person-year of protection, adjusted for insecticide resistance: under-14\'s only'])* \
         (1.0/inputs['Bednets']['Relative value of year of deworming treatment to development benefits from year of bednet coverage'])* \
         deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption'] + \
         (1.0/bednets['Cost per death averted'])* \
         inputs['Shared']['DALYs per death of a young child averted']* \
-        inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']
+        inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years'])
     bednets['Cost per equivalent life saved'] = \
         inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
         inputs['Shared']['DALYs per death of a young child averted']/ \
@@ -266,7 +266,7 @@ if __name__ == '__main__':
     iodine['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
         (inputs['Iodine']['% of benefit of iodine that lasts for the long term']* \
         inputs['Iodine']['Equivalent increase in wages from having iodine throughout childhood'])/ \
-        np.power((1.0 + inputs['Shared']['Discount rate']), 10.0)
+        np.power((1.0 + inputs['Shared']['Discount rate']),  inputs['Deworming']['Average number of years between deworming and the beginning of long term benefits - also used for iodine'])
     iodine['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))'] = \
         iodine['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)']* \
         (1.0 - 1.0/np.power((1.0 + inputs['Shared']['Discount rate']), inputs['Deworming']['Duration of long term benefits of deworming (years) - also used for iodine']))/ \

@@ -17,7 +17,7 @@ if __name__ == '__main__':
     
     cash = {'ROI of cash transfers': {'dist': 'array', 'val': [0.15, 0.1, 0.12, 0.19, 0.19, 0.1, 0.08, 0.1, 0.1, 0.15]}, \
         '% of transfers invested': {'dist': 'array', 'val': [0.25, 0.5, 0.35, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.25]}, \
-        'Duration of benefits in years': {'dist': 'array', 'val': [20.0, 20.0, 15.0, 20.0, 15.0, 20.0, 20.0, 20.0, 20.0, 15.0]}, \
+        'Duration of benefits of cash transfers (years)': {'dist': 'array', 'val': [20.0, 20.0, 15.0, 20.0, 15.0, 20.0, 20.0, 20.0, 20.0, 15.0]}, \
         'Transfers as a percentage of total cost': {'dist': 'array', 'val': [0.828, 0.828, 0.828, 0.828, 0.8, 0.828, 0.828, 0.828, 0.828, 0.828]}, \
         'Average family size': {'dist': 'const', 'val': 4.7}, \
         'Large transfer size, USD': {'dist': 'const', 'val': 1085.0}, \
