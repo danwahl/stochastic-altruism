@@ -97,4 +97,4 @@ if __name__ == '__main__':
     plt.legend(loc='lower right', ncol=2)
     plt.title('charity portfolios')
     plt.xlabel('variability')
-    plt.ylabel('X as cost effective as Cash')
+    plt.ylabel('x as cost effective as cash')
