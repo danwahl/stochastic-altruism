@@ -105,7 +105,7 @@ if __name__ == '__main__':
         inputs['Bednets']['Total amount spent']/ \
         bednets['Total deaths averted for children under 5']
     bednets['Aggregate adjustment to Baird development effect'] = \
-        inputs['Deworming']['External validity of deworming research']* \
+        inputs['Deworming']['Adjustment for El Nino']* \
         inputs['Deworming']['Replicability adjustment for  deworming']* \
         inputs['Deworming']['% of years of childhood in which deworming is helpful for development']* \
         inputs['Deworming']['Proportion of dewormed children that benefit from long term gains']/ \
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     cash['Control group per capita annual consumption, USD'] = \
         12.0*cash['Control group per capita monthly consumption, USD']
     cash['Cash flow from initial spending'] = \
-        (1.0 - inputs['Cash']['Percentage of transfers invested'])* \
+        (1.0 - inputs['Cash']['% of transfers invested'])* \
         cash['Size of transfer per person']
     cash['Initial balance'] = \
         cash['Size of transfer per person'] - cash['Cash flow from initial spending']
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption'] = \
         deworming['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))']* \
         inputs['Deworming']['Number of household members that benefit']* \
-        inputs['Deworming']['External validity of deworming research']* \
+        inputs['Deworming']['Adjustment for El Nino']* \
         inputs['Deworming']['% of years of childhood in which deworming is helpful for development']* \
         inputs['Deworming']['Proportion of dewormed children that benefit from long term gains']* \
         inputs['Deworming']['Replicability adjustment for  deworming']/ \
@@ -184,7 +184,7 @@ if __name__ == '__main__':
     
     dtw = {}
     dtw['Aggregate adjustment to Baird development effect'] = \
-        inputs['Deworming']['External validity of deworming research']* \
+        inputs['Deworming']['Adjustment for El Nino']* \
         inputs['Deworming']['Replicability adjustment for  deworming']* \
         inputs['Deworming']['% of years of childhood in which deworming is helpful for development']* \
         inputs['Deworming']['Proportion of dewormed children that benefit from long term gains']* \
@@ -200,15 +200,14 @@ if __name__ == '__main__':
         inputs['DtW']['Proportion of deworming going to children']* \
         inputs['DtW']['Prevalence/ intensity adjustment'] + \
         deworming['Short term health benefits (deworming only) in terms of Ln(income)']* \
-        inputs['DtW']['Prevalence/ intensity adjustment']* \
-        inputs['Deworming']['Prevalence/intensity ratio between M&K and short term health benefit observations'])
+        inputs['DtW']['Prevalence/ intensity adjustment'])
     dtw['Proportional increase in consumption per dollar'] = \
         dtw['Adjusted total benefits, per person dewormed (Ln(income))']/ \
         (inputs['DtW']['Cost per person dewormed']/ \
         inputs['DtW']['Leverage (dollar of impact per dollar spent)'])
     dtw['Cost per equivalent life saved'] = \
         inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
-        inputs['Shared']['DALYs per life']/ \
+        inputs['Shared']['DALYs per death of a young child averted']/ \
         dtw['Proportional increase in consumption per dollar']
     dtw['X as cost effective as Cash'] = \
         dtw['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
@@ -217,7 +216,7 @@ if __name__ == '__main__':
     
     sci = {}
     sci['Aggregate adjustment to Baird development effect'] = \
-        inputs['Deworming']['External validity of deworming research']* \
+        inputs['Deworming']['Adjustment for El Nino']* \
         inputs['Deworming']['Replicability adjustment for  deworming']* \
         inputs['Deworming']['% of years of childhood in which deworming is helpful for development']* \
         inputs['Deworming']['Proportion of dewormed children that benefit from long term gains']* \
@@ -233,15 +232,14 @@ if __name__ == '__main__':
         inputs['SCI']['Proportion of deworming going to children']* \
         inputs['SCI']['Prevalence/ intensity adjustment'] + \
         deworming['Short term health benefits (deworming only) in terms of Ln(income)']* \
-        inputs['SCI']['Prevalence/ intensity adjustment']* \
-        inputs['Deworming']['Prevalence/intensity ratio between M&K and short term health benefit observations'])
+        inputs['SCI']['Prevalence/ intensity adjustment'])
     sci['Proportional increase in consumption per dollar'] = \
         sci['Adjusted total benefits, per person dewormed (Ln(income))']/ \
         (inputs['SCI']['Cost per person dewormed']/ \
         inputs['SCI']['Leverage (dollar of impact per dollar spent)'])
     sci['Cost per equivalent life saved'] = \
         inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
-        inputs['Shared']['DALYs per life']/ \
+        inputs['Shared']['DALYs per death of a young child averted']/ \
         sci['Proportional increase in consumption per dollar']
     sci['X as cost effective as Cash'] = \
         sci['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
@@ -253,11 +251,11 @@ if __name__ == '__main__':
         (1.0/inputs['Bednets']['Relative value of year of deworming treatment to development benefits from year of bednet coverage'])* \
         deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption'] + \
         (1.0/bednets['Cost per death averted'])* \
-        inputs['Shared']['DALYs per life']* \
+        inputs['Shared']['DALYs per death of a young child averted']* \
         inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']
     bednets['Cost per equivalent life saved'] = \
         inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
-        inputs['Shared']['DALYs per life']/ \
+        inputs['Shared']['DALYs per death of a young child averted']/ \
         bednets['Proportional increase in consumption per dollar']
     bednets['X as cost effective as Cash'] = \
         bednets['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
@@ -281,8 +279,7 @@ if __name__ == '__main__':
         inputs['Deworming']['Number of household members that benefit']
     iodine['Short term health benefits (deworming only) in terms of Ln(income)'] = 0.0
     iodine['Adjusted total benefits, per person dewormed (Ln(income))'] = \
-        iodine['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption']* \
-        inputs['Iodine']['Household coverage achieved']
+        iodine['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption']
     iodine['Proportional increase in consumption per dollar'] = \
         inputs['Iodine']['Probability that GAIN/ICCIDD has an impact']* \
         iodine['Adjusted total benefits, per person dewormed (Ln(income))']/ \
@@ -311,7 +308,9 @@ if __name__ == '__main__':
     
     key = 'X as cost effective as Cash'
     data = np.log(np.array([bednets[key], dtw[key], sci[key], iodine[key]])).transpose()
+    #data = np.log(np.array([bednets[key], dtw[key], sci[key]])).transpose()
     df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine'])
+    #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci'])
     df.to_pickle('data.pickle')
     
     #x_max = np.max([bednets_d.ppf(0.9), dtw_d.ppf(0.9), sci_d.ppf(0.9)])

@@ -3,35 +3,31 @@
         "Prevalence/ intensity adjustment": {
             "dist": "array", 
             "val": [
-                1.0, 
-                0.259783066, 
-                0.185691342, 
-                0.185691342, 
-                0.122674144, 
-                0.185691342, 
-                0.146, 
-                0.185691342, 
-                0.185691342, 
-                0.185691342, 
-                0.185691342, 
-                0.185691342
+                0.263, 
+                0.1939, 
+                0.1939, 
+                0.1939, 
+                0.1214, 
+                0.1939, 
+                0.45, 
+                0.1939, 
+                0.1214, 
+                0.1939
             ]
         }, 
         "Cost per person dewormed": {
             "dist": "array", 
             "val": [
-                0.5292, 
                 0.72, 
+                0.5292, 
+                0.7, 
+                0.5292, 
                 0.9072, 
                 0.9072, 
-                0.5292, 
-                0.5292, 
-                0.88, 
+                1.2, 
                 0.9072, 
                 1.26, 
-                0.5292, 
-                0.5292, 
-                0.5292
+                1.26
             ]
         }, 
         "Proportion of deworming going to children": {
@@ -39,23 +35,19 @@
             "val": [
                 0.75, 
                 0.75, 
+                0.9, 
+                0.9, 
+                0.9, 
+                0.9, 
+                0.9, 
+                0.9, 
                 0.75, 
-                0.75, 
-                0.75, 
-                0.85, 
-                0.8, 
-                0.8, 
-                0.75, 
-                0.75, 
-                0.825, 
-                0.75
+                0.9
             ]
         }, 
         "Leverage (dollar of impact per dollar spent)": {
             "dist": "array", 
             "val": [
-                1.0, 
-                1.0, 
                 1.0, 
                 1.0, 
                 1.0, 
@@ -73,27 +65,26 @@
             "val": [
                 1.0, 
                 1.0, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.3, 
+                0.77, 
                 0.77, 
                 1.0, 
                 1.0, 
-                1.244, 
+                1.0, 
+                0.81, 
+                1.0, 
                 1.0
             ]
         }
     }, 
     "Iodine": {
-        "Percent of population under 15": {
-            "dist": "const", 
-            "val": 0.431
-        }, 
-        "Probability that GAIN/ICCIDD has an impact": {
-            "dist": "const", 
-            "val": 0.5
+        "Equivalent increase in wages from having iodine throughout childhood": {
+            "dist": "array", 
+            "val": [
+                0.036, 
+                0.036, 
+                0.036, 
+                0.036
+            ]
         }, 
         "% of children that benefit": {
             "dist": "array", 
@@ -101,29 +92,17 @@
                 0.8, 
                 0.8, 
                 0.8, 
-                0.8, 
-                0.8, 
-                0.8, 
-                1.0, 
-                0.8
+                1.0
             ]
         }, 
-        "Replicability": {
+        "Leverage (dollars of impact per dollars spent)": {
             "dist": "array", 
             "val": [
-                0.8, 
-                0.8, 
-                0.8, 
-                0.8, 
-                0.8, 
-                0.8, 
-                0.9, 
-                0.8
+                1.0, 
+                1.0, 
+                2.0, 
+                1.0
             ]
-        }, 
-        "Household coverage achieved": {
-            "dist": "const", 
-            "val": 0.66
         }, 
         "% of benefit of iodine that lasts for the long term": {
             "dist": "array", 
@@ -131,11 +110,38 @@
                 0.8, 
                 0.8, 
                 0.8, 
-                0.8, 
-                0.8, 
-                1.0, 
-                0.8, 
                 0.8
+            ]
+        }, 
+        "Replicability": {
+            "dist": "array", 
+            "val": [
+                0.8, 
+                0.7, 
+                0.9, 
+                0.8
+            ]
+        }, 
+        "Cost per person per year": {
+            "dist": "array", 
+            "val": [
+                0.1, 
+                0.1, 
+                0.08, 
+                0.08
+            ]
+        }, 
+        "Percent of population under 15": {
+            "dist": "const", 
+            "val": 0.431
+        }, 
+        "Probability that GAIN/ICCIDD has an impact": {
+            "dist": "array", 
+            "val": [
+                0.5, 
+                0.25, 
+                0.5, 
+                0.5
             ]
         }, 
         "External validity": {
@@ -144,69 +150,33 @@
                 0.7, 
                 0.7, 
                 0.7, 
-                0.7, 
-                0.7, 
-                0.7, 
-                0.7, 
-                0.6
+                0.7
             ]
         }, 
         "Years of Childhood (for iodine)": {
             "dist": "const", 
             "val": 15.0
-        }, 
-        "Equivalent increase in wages from having iodine throughout childhood": {
-            "dist": "array", 
-            "val": [
-                0.036, 
-                0.036, 
-                0.036, 
-                0.036, 
-                0.036, 
-                0.027, 
-                0.036, 
-                0.036
-            ]
-        }, 
-        "Leverage (dollars of impact per dollars spent)": {
-            "dist": "const", 
-            "val": 1.0
-        }, 
-        "Cost per person per year": {
-            "dist": "array", 
-            "val": [
-                0.1, 
-                0.1, 
-                0.1, 
-                0.1, 
-                0.1, 
-                0.08, 
-                0.08, 
-                0.08
-            ]
         }
     }, 
     "Cash": {
-        "Percentage of transfers invested": {
+        "% of investment returned after end of benefits": {
             "dist": "array", 
             "val": [
-                0.5, 
-                0.5, 
-                0.4, 
-                0.5, 
-                0.5, 
-                0.5, 
-                0.4, 
-                0.5, 
-                0.5, 
-                0.5, 
-                0.5, 
-                0.4
+                0.0, 
+                0.1, 
+                0.2, 
+                0.25, 
+                0.1, 
+                0.25, 
+                0.25, 
+                0.25, 
+                0.1, 
+                0.15
             ]
         }, 
         "Large transfer size, USD": {
             "dist": "const", 
-            "val": 1085
+            "val": 1085.0
         }, 
         "Size of transfer": {
             "dist": "const", 
@@ -220,21 +190,34 @@
             "dist": "const", 
             "val": 157.4
         }, 
+        "% of transfers invested": {
+            "dist": "array", 
+            "val": [
+                0.25, 
+                0.5, 
+                0.35, 
+                0.5, 
+                0.5, 
+                0.5, 
+                0.5, 
+                0.5, 
+                0.5, 
+                0.25
+            ]
+        }, 
         "Transfers as a percentage of total cost": {
             "dist": "array", 
             "val": [
-                0.808, 
-                0.808, 
-                0.808, 
-                0.845, 
-                0.808, 
-                0.808, 
-                0.845, 
-                0.845, 
-                0.845, 
-                0.808, 
-                0.808, 
-                0.808
+                0.828, 
+                0.828, 
+                0.828, 
+                0.828, 
+                0.8, 
+                0.828, 
+                0.828, 
+                0.828, 
+                0.828, 
+                0.828
             ]
         }, 
         "Duration of benefits in years": {
@@ -242,55 +225,45 @@
             "val": [
                 20.0, 
                 20.0, 
-                20.0, 
-                40.0, 
-                20.0, 
+                15.0, 
                 20.0, 
                 15.0, 
                 20.0, 
                 20.0, 
                 20.0, 
-                15.0, 
-                20.0
+                20.0, 
+                15.0
             ]
         }, 
         "ROI of cash transfers": {
             "dist": "array", 
             "val": [
-                0.19, 
                 0.15, 
-                0.15, 
-                0.19, 
-                0.23, 
                 0.1, 
+                0.12, 
                 0.19, 
-                0.2, 
-                0.1, 
                 0.19, 
                 0.1, 
-                0.19
+                0.08, 
+                0.1, 
+                0.1, 
+                0.15
             ]
         }
     }, 
     "Shared": {
-        "DALYs per life": {
-            "dist": "const", 
-            "val": 36.53
-        }, 
         "1 DALY is equivalent to increasing ln(income) by one unit for how many years": {
             "dist": "array", 
             "val": [
-                1.333333333, 
+                4.0, 
+                3.0, 
+                3.0, 
+                3.0, 
+                5.0, 
+                3.0, 
+                3.0, 
                 3.0, 
                 4.0, 
-                2.5, 
-                0.65, 
-                3.0, 
-                0.985533532, 
-                2.0, 
-                3.0, 
-                3.25, 
-                3.0, 
                 3.0
             ]
         }, 
@@ -302,20 +275,33 @@
             "dist": "const", 
             "val": 0
         }, 
+        "DALYs per death of a young child averted": {
+            "dist": "array", 
+            "val": [
+                12.0, 
+                30.0, 
+                30.0, 
+                5.0, 
+                17.0, 
+                36.525, 
+                40.0, 
+                36.525, 
+                3.0, 
+                36.525
+            ]
+        }, 
         "Discount rate": {
             "dist": "array", 
             "val": [
                 0.05, 
-                0.05, 
-                0.05, 
-                0.05, 
-                0.05, 
-                0.05, 
-                0.05, 
                 0.03, 
-                0.01, 
+                0.03, 
+                0.03, 
+                0.03, 
                 0.05, 
-                0.04, 
+                0.035, 
+                0.05, 
+                0.05, 
                 0.05
             ]
         }, 
@@ -328,42 +314,36 @@
         "Prevalence/ intensity adjustment": {
             "dist": "array", 
             "val": [
-                1.0, 
-                0.2124, 
-                0.2536, 
-                0.2536, 
-                0.2481, 
-                0.2536, 
-                0.291, 
-                0.2536, 
-                0.2536, 
-                0.2536, 
-                0.2536, 
-                0.2536
+                0.2145, 
+                0.2496, 
+                0.2496, 
+                0.2496, 
+                0.2584, 
+                0.2496, 
+                0.31, 
+                0.2496, 
+                0.1719, 
+                0.2496
             ]
         }, 
         "Cost per person dewormed": {
             "dist": "array", 
             "val": [
-                0.51, 
-                0.63, 
-                0.75, 
-                0.75, 
-                0.51, 
-                0.51, 
-                0.644, 
-                0.75, 
+                0.67, 
+                0.56, 
+                0.7, 
+                0.56, 
                 0.8, 
-                0.51, 
-                0.51, 
-                0.51
+                0.78, 
+                0.68, 
+                0.78, 
+                0.8, 
+                0.8
             ]
         }, 
         "Proportion of deworming going to children": {
             "dist": "array", 
             "val": [
-                1.0, 
-                1.0, 
                 1.0, 
                 1.0, 
                 1.0, 
@@ -379,16 +359,14 @@
         "Leverage (dollar of impact per dollar spent)": {
             "dist": "array", 
             "val": [
-                1.17, 
+                1.0, 
+                1.0, 
                 1.0, 
                 1.17, 
-                1.07, 
-                1.17, 
-                1.07, 
-                1.08, 
-                1.0, 
                 1.0, 
                 1.35, 
+                1.0, 
+                1.0, 
                 1.0, 
                 1.0
             ]
@@ -396,37 +374,48 @@
         "Adjustment for benefit varying by treatment frequency": {
             "dist": "array", 
             "val": [
-                0.666666667, 
-                0.71, 
                 1.0, 
                 1.0, 
                 0.77, 
-                0.81, 
-                1.2, 
                 0.77, 
-                0.81, 
+                1.0, 
                 0.77, 
-                0.958, 
+                1.0, 
+                0.81, 
+                0.81, 
                 0.81
             ]
         }
     }, 
     "Deworming": {
+        "Adjustment for El Nino": {
+            "dist": "array", 
+            "val": [
+                0.560606061, 
+                0.9, 
+                0.8, 
+                0.711538462, 
+                0.711538462, 
+                1.0, 
+                0.9, 
+                0.560606061, 
+                0.711538462, 
+                0.542124542
+            ]
+        }, 
         "Number of household members that benefit": {
             "dist": "array", 
             "val": [
-                2.0, 
-                1.442696146, 
                 1.2, 
                 1.1, 
-                2.0, 
-                1.1, 
-                1.2, 
-                2.0, 
                 1.5, 
-                1.442696146, 
-                1.84, 
-                1.442696146
+                1.4, 
+                1.4, 
+                1.4, 
+                1.5, 
+                1.4, 
+                1.0, 
+                1.4
             ]
         }, 
         "Years of deworming treatment in Miguel and Kremer 2004": {
@@ -440,19 +429,43 @@
                 0.001760818, 
                 0.001760818, 
                 0.001760818, 
-                0.001826885, 
-                0.001760818, 
-                0.001826885, 
                 0.001760818, 
                 0.001760818, 
                 0.001760818, 
-                0.001826885, 
-                0.001760818
+                0.001760818, 
+                0.0, 
+                0.00168243
+            ]
+        }, 
+        "Average number of years between deworming and the beginning of long term benefits - also used for iodine": {
+            "dist": "array", 
+            "val": [
+                8.0, 
+                10.0, 
+                7.0, 
+                5.0, 
+                8.0, 
+                8.0, 
+                5.0, 
+                8.0, 
+                5.0, 
+                8.0
             ]
         }, 
         "Duration of long term benefits of deworming (years) - also used for iodine": {
-            "dist": "const", 
-            "val": 35.0
+            "dist": "array", 
+            "val": [
+                25.0, 
+                20.0, 
+                25.0, 
+                25.0, 
+                20.0, 
+                40.0, 
+                30.0, 
+                25.0, 
+                20.0, 
+                20.0
+            ]
         }, 
         "Treatment effect of deworming on Ln(total labor earnings)": {
             "dist": "const", 
@@ -461,134 +474,107 @@
         "Replicability adjustment for  deworming": {
             "dist": "array", 
             "val": [
-                0.75, 
-                0.6, 
-                0.6, 
-                0.6, 
                 0.5, 
+                0.35, 
+                0.3, 
+                0.23, 
                 0.6, 
+                0.23, 
+                0.25, 
+                0.23, 
                 0.6, 
-                0.4, 
-                0.6, 
-                0.6, 
-                0.33, 
                 0.6
-            ]
-        }, 
-        "Prevalence/intensity ratio between M&K and short term health benefit observations": {
-            "dist": "array", 
-            "val": [
-                1.0, 
-                1.0, 
-                2.0, 
-                2.0, 
-                2.0, 
-                2.0, 
-                2.0, 
-                2.0, 
-                2.0, 
-                1.0, 
-                2.0, 
-                2.0
-            ]
-        }, 
-        "External validity of deworming research": {
-            "dist": "array", 
-            "val": [
-                0.302549303, 
-                0.616666667, 
-                0.542124542, 
-                0.542124542, 
-                0.560606061, 
-                0.504100529, 
-                0.542124542, 
-                0.6, 
-                0.560606061, 
-                0.302549303, 
-                0.635, 
-                0.302549303
             ]
         }, 
         "Proportion of dewormed children that benefit from long term gains": {
             "dist": "array", 
             "val": [
                 0.3, 
-                0.3, 
+                0.25, 
+                0.25, 
                 0.166, 
-                0.3, 
-                0.3, 
-                0.3, 
                 0.2, 
                 0.3, 
                 0.3, 
-                0.3, 
-                0.5, 
-                0.3
+                0.166, 
+                0.166, 
+                0.166
             ]
         }, 
         "% of years of childhood in which deworming is helpful for development": {
             "dist": "array", 
             "val": [
-                0.5, 
-                1.0, 
                 0.75, 
                 0.75, 
+                0.7, 
+                0.8, 
+                0.6, 
+                0.8, 
+                0.8, 
                 1.0, 
-                0.75, 
-                0.5, 
-                0.75, 
-                1.0, 
-                1.0, 
-                1.0, 
-                0.8
+                0.8, 
+                0.5
             ]
         }
     }, 
     "Bednets": {
         "Percent of population under 5": {
             "dist": "const", 
-            "val": 0.179
+            "val": 0.1725
         }, 
         "Cost per ITN distributed (including delivery)": {
             "dist": "const", 
-            "val": 5.3
+            "val": 4.47
         }, 
         "Under 5 all mortality rate 2015 (per 1000)": {
             "dist": "const", 
-            "val": 77.0
+            "val": 69.0
         }, 
         "Pre-existing ITN ownership: all": {
             "dist": "const", 
-            "val": 0.57
+            "val": 0.531
         }, 
         "Percent of population aged 5-14": {
             "dist": "const", 
-            "val": 0.3017
+            "val": 0.308
         }, 
         "Relative value of year of deworming treatment to development benefits from year of bednet coverage": {
             "dist": "array", 
             "val": [
                 2.0, 
-                4.23564533, 
-                2.0, 
-                2.0, 
+                1.0, 
+                1.5, 
                 2.0, 
                 1.0, 
                 2.0, 
+                3.0, 
                 2.0, 
-                2.0, 
-                1.0, 
-                2.0, 
-                4.0
+                1.5, 
+                1.0
             ]
         }, 
         "Impact of insecticide resistance": {
             "dist": "const", 
-            "val": 0.2
+            "val": 0.33
         }, 
         "Pre-existing ITN ownership: all (from AMF)": {
             "dist": "const", 
-            "val": 0.12
+            "val": 0.1221
+        }, 
+        "Alternative funders adjustment": {
+            "dist": "array", 
+            "val": [
+                0.75, 
+                0.86, 
+                0.85, 
+                0.85, 
+                0.86, 
+                0.86, 
+                0.75, 
+                0.86, 
+                0.86, 
+                0.86
+            ]
         }, 
         "People covered per LLIN": {
             "dist": "const", 
@@ -612,11 +598,11 @@
         }, 
         "Pre-existing ITN ownership: children aged 5-14 (from DHS)": {
             "dist": "const", 
-            "val": 0.44
+            "val": 0.4575
         }, 
         "Wastage": {
             "dist": "const", 
-            "val": 0.05
+            "val": 0.1
         }, 
         "Decrease 2004-2015 attributed to ITNs": {
             "dist": "const", 
@@ -624,11 +610,11 @@
         }, 
         "Under 5 all mortality rate 2004 (per 1000)": {
             "dist": "const", 
-            "val": 127.0
+            "val": 117.0
         }, 
         "Pre-existing ITN ownership: children under 5 (from DHS)": {
             "dist": "const", 
-            "val": 0.67
+            "val": 0.631
         }, 
         "Years of protection per person per LLIN": {
             "dist": "const", 

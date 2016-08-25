@@ -91,13 +91,13 @@ if __name__ == '__main__':
     colors = ['b', 'g', 'r', 'm']
     plt.figure(0)
     plt.axis([0.0, 1, 1, 15])
-    plt.semilogy(va, np.exp(ra), '-', label='optimal', color='c')
+    plt.semilogy(va, np.exp(ra), '--', label='optimal', color='c')
     plt.semilogy([0, vt], np.exp([0, rt]), 'o-', label='tangency', color='y')
     plt.semilogy(vm, np.exp(rm), 'o', label='mvp', color='k')
     for j in range(n):
         plt.semilogy(s[j], np.exp(p[j]), 'o', label=data.columns[j], color=colors[j])
     
-    plt.legend(loc='lower right')
+    plt.legend(loc='lower right', ncol=2)
     plt.title('charity portfolios')
     plt.xlabel('variability')
     plt.ylabel('X as cost effective as Cash')
