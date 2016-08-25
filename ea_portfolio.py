@@ -17,8 +17,6 @@ solvers.options['show_progress'] = False
 
 import pandas as pd
 
-import datetime as dt
-
 def portfolio_solver(S, p=np.empty(0), r=0.0):
     n = S.shape[0]    
     
@@ -88,7 +86,7 @@ if __name__ == '__main__':
     # plot
     colors = ['b', 'g', 'r', 'm']
     plt.figure(0)
-    plt.axis([0.0, 1, 1, 15])
+    plt.axis([0.0, 1, 1, 10])
     plt.semilogy(va, np.exp(ra), '--', label='optimal', color='c')
     plt.semilogy([0, vt], np.exp([0, rt]), 'o-', label='tangency', color='y')
     plt.semilogy(vm, np.exp(rm), 'o', label='mvp', color='k')

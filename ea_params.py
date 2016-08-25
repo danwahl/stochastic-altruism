@@ -69,6 +69,7 @@ if __name__ == '__main__':
         'Relative value of year of deworming treatment to development benefits from year of bednet coverage':  {'dist': 'array', 'val': [2.0, 1.0, 1.5, 2.0, 1.0, 2.0, 3.0, 2.0, 1.5, 1.0]}, \
         'Alternative funders adjustment': {'dist': 'array', 'val': [0.75, 0.86, 0.85, 0.85, 0.86, 0.86, 0.75, 0.86, 0.86, 0.86]}}
     
+    # added random iodine parameters for six missing gw staff
     iodine = {'Cost per person per year': {'dist': 'array', 'val': [0.1, 0.1, 0.08, 0.08, 0.08, 0.08, 0.05, 0.05, 0.1, 0.1]}, \
         'Replicability': {'dist': 'array', 'val': [0.8, 0.7, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.7, 0.7]}, \
         'External validity': {'dist': 'array', 'val': [0.7, 0.7, 0.7, 0.7]}, \
