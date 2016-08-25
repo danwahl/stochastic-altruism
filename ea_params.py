@@ -67,8 +67,20 @@ if __name__ == '__main__':
         '% of impact of ITNs coming from community-wide effects': {'dist': 'const', 'val': 0.5}, \
         'Total amount spent':  {'dist': 'const', 'val': 1000000}, \
         'Relative value of year of deworming treatment to development benefits from year of bednet coverage':  {'dist': 'array', 'val': [2.0, 4.23564533, 2.0, 2.0, 2.0, 1.0, 2.0, 2.0, 2.0, 1.0, 2.0, 4.0]}}
-        
-    params = {'Shared': shared, 'Cash': cash, 'Deworming': deworming, 'DtW': dtw, 'SCI': sci, 'Bednets': bednets}
+    
+    iodine = {'Cost per person per year': {'dist': 'array', 'val': [0.1, 0.1, 0.1, 0.1, 0.1, 0.08, 0.08, 0.08]}, \
+        'Replicability': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 0.8]}, \
+        'External validity': {'dist': 'array', 'val': [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6]}, \
+        'Leverage (dollars of impact per dollars spent)': {'dist': 'const', 'val': 1.0}, \
+        '% of benefit of iodine that lasts for the long term': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 0.8, 0.8]}, \
+        'Household coverage achieved': {'dist': 'const', 'val': 0.66}, \
+        'Probability that GAIN/ICCIDD has an impact': {'dist': 'const', 'val': 0.5}, \
+        '% of children that benefit': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 0.8]}, \
+        'Equivalent increase in wages from having iodine throughout childhood': {'dist': 'array', 'val': [0.036, 0.036, 0.036, 0.036, 0.036, 0.027, 0.036, 0.036]}, \
+        'Years of Childhood (for iodine)': {'dist': 'const', 'val': 15.0}, \
+        'Percent of population under 15': {'dist': 'const', 'val': 0.431}}
+    
+    params = {'Shared': shared, 'Cash': cash, 'Deworming': deworming, 'DtW': dtw, 'SCI': sci, 'Bednets': bednets, 'Iodine': iodine}
     
     with open('params.json', 'w') as fp:
         json.dump(params, fp, indent=4)

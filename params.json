@@ -86,6 +86,106 @@
             ]
         }
     }, 
+    "Iodine": {
+        "Percent of population under 15": {
+            "dist": "const", 
+            "val": 0.431
+        }, 
+        "Probability that GAIN/ICCIDD has an impact": {
+            "dist": "const", 
+            "val": 0.5
+        }, 
+        "% of children that benefit": {
+            "dist": "array", 
+            "val": [
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                1.0, 
+                0.8
+            ]
+        }, 
+        "Replicability": {
+            "dist": "array", 
+            "val": [
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                0.9, 
+                0.8
+            ]
+        }, 
+        "Household coverage achieved": {
+            "dist": "const", 
+            "val": 0.66
+        }, 
+        "% of benefit of iodine that lasts for the long term": {
+            "dist": "array", 
+            "val": [
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                0.8, 
+                1.0, 
+                0.8, 
+                0.8
+            ]
+        }, 
+        "External validity": {
+            "dist": "array", 
+            "val": [
+                0.7, 
+                0.7, 
+                0.7, 
+                0.7, 
+                0.7, 
+                0.7, 
+                0.7, 
+                0.6
+            ]
+        }, 
+        "Years of Childhood (for iodine)": {
+            "dist": "const", 
+            "val": 15.0
+        }, 
+        "Equivalent increase in wages from having iodine throughout childhood": {
+            "dist": "array", 
+            "val": [
+                0.036, 
+                0.036, 
+                0.036, 
+                0.036, 
+                0.036, 
+                0.027, 
+                0.036, 
+                0.036
+            ]
+        }, 
+        "Leverage (dollars of impact per dollars spent)": {
+            "dist": "const", 
+            "val": 1.0
+        }, 
+        "Cost per person per year": {
+            "dist": "array", 
+            "val": [
+                0.1, 
+                0.1, 
+                0.1, 
+                0.1, 
+                0.1, 
+                0.08, 
+                0.08, 
+                0.08
+            ]
+        }
+    }, 
     "Cash": {
         "Percentage of transfers invested": {
             "dist": "array", 

@@ -262,15 +262,48 @@ if __name__ == '__main__':
     #bednets_p = stats.lognorm.fit(bednets['X as cost effective as Cash'])
     #bednets_d = stats.lognorm(*bednets_p[:-2], loc=bednets_p[-2], scale=bednets_p[-1])
     
-    x = np.linspace(0.0, 50.0, 100)
+    iodine = {}
+    iodine['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
+        (inputs['Iodine']['% of benefit of iodine that lasts for the long term']* \
+        inputs['Iodine']['Equivalent increase in wages from having iodine throughout childhood'])/ \
+        np.power((1.0 + inputs['Shared']['Discount rate']), 10.0)
+    iodine['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))'] = \
+        iodine['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)']* \
+        (1.0 - 1.0/np.power((1.0 + inputs['Shared']['Discount rate']), inputs['Deworming']['Duration of long term benefits of deworming (years) - also used for iodine']))/ \
+        (1.0 - 1.0/(1.0 + inputs['Shared']['Discount rate']))
+    iodine['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption'] = \
+        iodine['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))']* \
+        inputs['Iodine']['Replicability']*inputs['Iodine']['External validity']* \
+        inputs['Iodine']['% of children that benefit']* \
+        (inputs['Iodine']['Percent of population under 15']/inputs['Iodine']['Years of Childhood (for iodine)'])* \
+        inputs['Deworming']['Number of household members that benefit']
+    iodine['Short term health benefits (deworming only) in terms of Ln(income)'] = 0.0
+    iodine['Adjusted total benefits, per person dewormed (Ln(income))'] = \
+        iodine['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption']* \
+        inputs['Iodine']['Household coverage achieved']
+    iodine['Proportional increase in consumption per dollar'] = \
+        inputs['Iodine']['Probability that GAIN/ICCIDD has an impact']* \
+        iodine['Adjusted total benefits, per person dewormed (Ln(income))']/ \
+        (inputs['Iodine']['Cost per person per year']/inputs['Iodine']['Leverage (dollars of impact per dollars spent)'])
+    iodine['X as cost effective as Cash'] = \
+        iodine['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
+    
+    x = np.linspace(0.0, 30.0, 50)
+    #cash_y, cash_x = np.histogram(cash['Proportional increase in consumption per dollar']/np.median(cash['Proportional increase in consumption per dollar']), bins=x, density=True)
     bednets_y, bednets_x = np.histogram(bednets['X as cost effective as Cash'], bins=x, density=True)
     dtw_y, dtw_x = np.histogram(dtw['X as cost effective as Cash'], bins=x, density=True)
     sci_y, sci_x = np.histogram(sci['X as cost effective as Cash'], bins=x, density=True)
+    iodine_y, iodine_x = np.histogram(iodine['X as cost effective as Cash'], bins=x, density=True)
     
-    plt.plot((bednets_x[:-1] + bednets_x[1:])/2.0, bednets_y, label='bednets', color='b')
-    plt.plot((dtw_x[:-1] + dtw_x[1:])/2.0, dtw_y, label='dtw', color='g')
-    plt.plot((sci_x[:-1] + sci_x[1:])/2.0, sci_y, label='sci', color='r')
+    #plt.plot((cash_x[:-1] + cash_x[1:])/2.0, cash_y, label='cash', color='k')
+    plt.semilogx((bednets_x[:-1] + bednets_x[1:])/2.0, bednets_y, label='bednets', color='b')
+    plt.semilogx((dtw_x[:-1] + dtw_x[1:])/2.0, dtw_y, label='dtw', color='g')
+    plt.semilogx((sci_x[:-1] + sci_x[1:])/2.0, sci_y, label='sci', color='r')
+    plt.semilogx((iodine_x[:-1] + iodine_x[1:])/2.0, iodine_y, label='iodine', color='m')
     plt.xlim([0, np.max(x)])
+    plt.xlabel('x as cost effective as cash')
+    plt.ylabel('probability')
+    plt.title('pdf of cost effectiveness vs. cash')
     plt.legend(loc='upper right')
     plt.show()
     
