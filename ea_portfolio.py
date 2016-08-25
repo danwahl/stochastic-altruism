@@ -7,8 +7,6 @@ Created on Wed Aug 24 20:16:53 2016
 
 import numpy as np
 
-import scipy.stats as stats
-
 import matplotlib.pyplot as plt
 #from matplotlib.patches import Ellipse
 plt.style.use('ggplot')
@@ -96,6 +94,7 @@ if __name__ == '__main__':
     plt.semilogy(vm, np.exp(rm), 'o', label='mvp', color='k')
     for j in range(n):
         plt.semilogy(s[j], np.exp(p[j]), 'o', label=data.columns[j], color=colors[j])
+    plt.grid(b=True, which='minor', linestyle='--')
     
     plt.legend(loc='lower right', ncol=2)
     plt.title('charity portfolios')
