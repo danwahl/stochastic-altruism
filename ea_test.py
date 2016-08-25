@@ -12,6 +12,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
+import pandas as pd
+
 def get_rvs(p, n):
     if p['dist'] == 'uniform':
         return stats.uniform.rvs(loc=p['loc'], scale=p['scale'], size=n)
@@ -306,6 +308,11 @@ if __name__ == '__main__':
     plt.title('pdf of cost effectiveness vs. cash')
     plt.legend(loc='upper right')
     plt.show()
+    
+    key = 'X as cost effective as Cash'
+    data = np.log(np.array([bednets[key], dtw[key], sci[key], iodine[key]])).transpose()
+    df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine'])
+    df.to_pickle('data.pickle')
     
     #x_max = np.max([bednets_d.ppf(0.9), dtw_d.ppf(0.9), sci_d.ppf(0.9)])
     #x = np.linspace(0, x_max, 100)
