@@ -83,7 +83,13 @@
                 0.036, 
                 0.036, 
                 0.036, 
-                0.036
+                0.036, 
+                0.036, 
+                0.036, 
+                0.027, 
+                0.027, 
+                0.054, 
+                0.054
             ]
         }, 
         "% of children that benefit": {
@@ -92,7 +98,13 @@
                 0.8, 
                 0.8, 
                 0.8, 
-                1.0
+                1.0, 
+                0.8, 
+                0.8, 
+                1.0, 
+                1.0, 
+                0.332, 
+                0.332
             ]
         }, 
         "Leverage (dollars of impact per dollars spent)": {
@@ -101,7 +113,13 @@
                 1.0, 
                 1.0, 
                 2.0, 
-                1.0
+                1.0, 
+                1.0, 
+                1.0, 
+                1.0, 
+                2.0, 
+                2.0, 
+                2.0
             ]
         }, 
         "% of benefit of iodine that lasts for the long term": {
@@ -110,7 +128,13 @@
                 0.8, 
                 0.8, 
                 0.8, 
-                0.8
+                0.8, 
+                0.8, 
+                0.8, 
+                1.0, 
+                1.0, 
+                0.4, 
+                0.4
             ]
         }, 
         "Replicability": {
@@ -119,7 +143,13 @@
                 0.8, 
                 0.7, 
                 0.9, 
-                0.8
+                0.8, 
+                0.8, 
+                0.8, 
+                0.6, 
+                0.6, 
+                0.7, 
+                0.7
             ]
         }, 
         "Cost per person per year": {
@@ -128,7 +158,13 @@
                 0.1, 
                 0.1, 
                 0.08, 
-                0.08
+                0.08, 
+                0.08, 
+                0.08, 
+                0.05, 
+                0.05, 
+                0.1, 
+                0.1
             ]
         }, 
         "Percent of population under 15": {
@@ -141,7 +177,13 @@
                 0.5, 
                 0.25, 
                 0.5, 
-                0.5
+                0.5, 
+                0.5, 
+                0.5, 
+                0.75, 
+                0.75, 
+                0.25, 
+                0.25
             ]
         }, 
         "External validity": {
@@ -178,13 +220,24 @@
             "dist": "const", 
             "val": 1085.0
         }, 
+        "Duration of benefits of cash transfers (years)": {
+            "dist": "array", 
+            "val": [
+                20.0, 
+                20.0, 
+                15.0, 
+                20.0, 
+                15.0, 
+                20.0, 
+                20.0, 
+                20.0, 
+                20.0, 
+                15.0
+            ]
+        }, 
         "Size of transfer": {
             "dist": "const", 
             "val": 1000.0
-        }, 
-        "Average family size": {
-            "dist": "const", 
-            "val": 4.7
         }, 
         "Control group household monthly consumption, USD PPP": {
             "dist": "const", 
@@ -220,20 +273,9 @@
                 0.828
             ]
         }, 
-        "Duration of benefits in years": {
-            "dist": "array", 
-            "val": [
-                20.0, 
-                20.0, 
-                15.0, 
-                20.0, 
-                15.0, 
-                20.0, 
-                20.0, 
-                20.0, 
-                20.0, 
-                15.0
-            ]
+        "Average family size": {
+            "dist": "const", 
+            "val": 4.7
         }, 
         "ROI of cash transfers": {
             "dist": "array", 

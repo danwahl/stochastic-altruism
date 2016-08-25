@@ -69,14 +69,14 @@ if __name__ == '__main__':
         'Relative value of year of deworming treatment to development benefits from year of bednet coverage':  {'dist': 'array', 'val': [2.0, 1.0, 1.5, 2.0, 1.0, 2.0, 3.0, 2.0, 1.5, 1.0]}, \
         'Alternative funders adjustment': {'dist': 'array', 'val': [0.75, 0.86, 0.85, 0.85, 0.86, 0.86, 0.75, 0.86, 0.86, 0.86]}}
     
-    iodine = {'Cost per person per year': {'dist': 'array', 'val': [0.1, 0.1, 0.08, 0.08]}, \
-        'Replicability': {'dist': 'array', 'val': [0.8, 0.7, 0.9, 0.8]}, \
+    iodine = {'Cost per person per year': {'dist': 'array', 'val': [0.1, 0.1, 0.08, 0.08, 0.08, 0.08, 0.05, 0.05, 0.1, 0.1]}, \
+        'Replicability': {'dist': 'array', 'val': [0.8, 0.7, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.7, 0.7]}, \
         'External validity': {'dist': 'array', 'val': [0.7, 0.7, 0.7, 0.7]}, \
-        'Leverage (dollars of impact per dollars spent)': {'dist': 'array', 'val': [1.0, 1.0, 2.0, 1.0]}, \
-        '% of benefit of iodine that lasts for the long term': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 0.8]}, \
-        'Probability that GAIN/ICCIDD has an impact': {'dist': 'array', 'val': [0.5, 0.25, 0.5, 0.5]}, \
-        '% of children that benefit': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 1.0]}, \
-        'Equivalent increase in wages from having iodine throughout childhood': {'dist': 'array', 'val': [0.036, 0.036, 0.036, 0.036]}, \
+        'Leverage (dollars of impact per dollars spent)': {'dist': 'array', 'val': [1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0]}, \
+        '% of benefit of iodine that lasts for the long term': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 1.0, 0.4, 0.4]}, \
+        'Probability that GAIN/ICCIDD has an impact': {'dist': 'array', 'val': [0.5, 0.25, 0.5, 0.5, 0.5, 0.5, 0.75, 0.75, 0.25, 0.25]}, \
+        '% of children that benefit': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 1.0, 0.8, 0.8, 1.0, 1.0, 0.332, 0.332]}, \
+        'Equivalent increase in wages from having iodine throughout childhood': {'dist': 'array', 'val': [0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.027, 0.027, 0.054, 0.054]}, \
         'Years of Childhood (for iodine)': {'dist': 'const', 'val': 15.0}, \
         'Percent of population under 15': {'dist': 'const', 'val': 0.431}}
     

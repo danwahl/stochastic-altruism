@@ -144,12 +144,12 @@ if __name__ == '__main__':
     cash['Cash flow from investment return'] = \
         cash['Initial balance']*inputs['Cash']['ROI of cash transfers']
     cash['Sum of benefits from year 1 onward'] = \
-        ((1.0 - np.power((1.0 + inputs['Shared']['Discount rate']), -(inputs['Cash']['Duration of benefits in years'] - 1.0)))/ \
+        ((1.0 - np.power((1.0 + inputs['Shared']['Discount rate']), -(inputs['Cash']['Duration of benefits of cash transfers (years)'] - 1.0)))/ \
         inputs['Shared']['Discount rate'])*(np.log(cash['Cash flow from investment return'] + cash['Control group per capita annual consumption, USD']) - \
         np.log(cash['Control group per capita annual consumption, USD'])) + \
         (np.log((cash['Initial balance'] + cash['Cash flow from investment return']) + \
         cash['Control group per capita annual consumption, USD']) - np.log(cash['Control group per capita annual consumption, USD']))* \
-        (np.power((1.0 + inputs['Shared']['Discount rate']), -inputs['Cash']['Duration of benefits in years']))
+        (np.power((1.0 + inputs['Shared']['Discount rate']), -inputs['Cash']['Duration of benefits of cash transfers (years)']))
     cash['Present value of the sum of future benefits from cash transfers (ln income)'] = \
         cash['Sum of benefits from year 1 onward']
     cash['Increase in current consumption from spending the transfer (Ln(income))'] = \
