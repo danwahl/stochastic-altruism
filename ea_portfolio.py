@@ -79,22 +79,28 @@ if __name__ == '__main__':
     # tangency portfolio
     sr = ra/va
     it = sr.argmax()
-    rt = ra[it]    
-    vt = va[it]
+    #rt = ra[it]  
+    #vt = va[it]
     xt = xa[it, :]
+    
+    yt = np.linspace(0.0, 1.0, N)
+    rt = ra[it]*yt
+    vt = va[it]*yt
     
     # plot
     colors = ['b', 'g', 'r', 'm']
-    plt.figure(0)
+    plt.figure(0, figsize=(8, 6))
     plt.axis([0.0, 1, 1, 10])
-    plt.semilogy(va, np.exp(ra), '--', label='optimal', color='c')
-    plt.semilogy([0, vt], np.exp([0, rt]), 'o-', label='tangency', color='y')
-    plt.semilogy(vm, np.exp(rm), 'o', label='mvp', color='k')
     for j in range(n):
-        plt.semilogy(s[j], np.exp(p[j]), 'o', label=data.columns[j], color=colors[j])
-    plt.grid(b=True, which='minor', linestyle='--')
+        plt.plot(s[j], np.exp(p[j]), 'o', label=data.columns[j], color=colors[j])
+    plt.plot(va, np.exp(ra), '--', label='optimal', color='c')
+    #plt.plot([0, vt], np.exp([0, rt]), 'o--', label='tangency', color='y')
+    plt.plot(vt, np.exp(rt), '--', label='tangency', color='y')
+    plt.plot(vm, np.exp(rm), 'o', label='mvp', color='k')
+
+    #plt.grid(b=True, which='minor', linestyle='--')
     
-    plt.legend(loc='lower right', ncol=2)
-    plt.title('charity portfolios')
-    plt.xlabel('variability')
-    plt.ylabel('x as cost effective as cash')
+    plt.legend(loc='lower right', ncol=3, numpoints=1)
+    plt.title('GiveWell charity portfolios')
+    plt.xlabel('Variability')
+    plt.ylabel('X as cost effective as Cash')

@@ -287,22 +287,24 @@ if __name__ == '__main__':
     iodine['X as cost effective as Cash'] = \
         iodine['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     
-    x = np.linspace(0.0, 30.0, 50)
+    #x = np.linspace(0.0, 30.0, 50)
+    x = np.logspace(-1, 2, 100)
     #cash_y, cash_x = np.histogram(cash['Proportional increase in consumption per dollar']/np.median(cash['Proportional increase in consumption per dollar']), bins=x, density=True)
     bednets_y, bednets_x = np.histogram(bednets['X as cost effective as Cash'], bins=x, density=True)
     dtw_y, dtw_x = np.histogram(dtw['X as cost effective as Cash'], bins=x, density=True)
     sci_y, sci_x = np.histogram(sci['X as cost effective as Cash'], bins=x, density=True)
     iodine_y, iodine_x = np.histogram(iodine['X as cost effective as Cash'], bins=x, density=True)
     
+    plt.figure(0,  figsize=(8, 6))
     #plt.plot((cash_x[:-1] + cash_x[1:])/2.0, cash_y, label='cash', color='k')
     plt.semilogx((bednets_x[:-1] + bednets_x[1:])/2.0, bednets_y, label='bednets', color='b')
     plt.semilogx((dtw_x[:-1] + dtw_x[1:])/2.0, dtw_y, label='dtw', color='g')
     plt.semilogx((sci_x[:-1] + sci_x[1:])/2.0, sci_y, label='sci', color='r')
     plt.semilogx((iodine_x[:-1] + iodine_x[1:])/2.0, iodine_y, label='iodine', color='m')
     plt.xlim([0, np.max(x)])
-    plt.xlabel('x as cost effective as cash')
-    plt.ylabel('probability')
-    plt.title('pdf of cost effectiveness vs. cash')
+    plt.xlabel('X as cost effective as Cash')
+    plt.ylabel('Probability')
+    plt.title('PDF of log cost effectiveness')
     plt.legend(loc='upper right')
     plt.show()
     
