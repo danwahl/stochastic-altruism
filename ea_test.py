@@ -304,12 +304,13 @@ if __name__ == '__main__':
     plt.xlim([0, np.max(x)])
     plt.xlabel('X as cost effective as Cash')
     plt.ylabel('Probability')
-    plt.title('PDF of log cost effectiveness')
+    plt.title('PDF of cost effectiveness')
     plt.legend(loc='upper right')
     plt.show()
     
     key = 'X as cost effective as Cash'
-    data = np.log(np.array([bednets[key], dtw[key], sci[key], iodine[key]])).transpose()
+    #data = np.log(np.array([bednets[key], dtw[key], sci[key], iodine[key]])).transpose()
+    data = np.array([bednets[key], dtw[key], sci[key], iodine[key]]).transpose()
     #data = np.log(np.array([bednets[key], dtw[key], sci[key]])).transpose()
     df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine'])
     #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci'])

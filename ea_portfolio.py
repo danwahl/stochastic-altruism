@@ -45,20 +45,31 @@ def portfolio_solver(S, p=np.empty(0), r=0.0):
     else:
         return np.empty(0)
 
+def downside_risk(x, t):
+    return np.sqrt(np.power(np.minimum(0.0, x - t), 2.0).sum()/x.size)
+
 if __name__ == '__main__':
     data = pd.read_pickle('data.pickle')
     n = data.shape[1]
     
+    # target return
+    t = 5.0
+    
     p = data.mean().as_matrix()
     
     S = data.cov().as_matrix()
-    s = data.std().as_matrix()
+    #s = data.std().as_matrix()
+    s = data.apply(lambda x: downside_risk(x, t), axis=0).as_matrix()
     
+    # minimum variance portfolio
     xm = portfolio_solver(S)
+    dm = np.multiply(data.as_matrix(), xm.transpose()).sum(axis=1)
+    rm = dm.mean()
+    vm = downside_risk(dm, t)
     
     # returns and variability
-    rm = np.dot(p, xm)[0]
-    vm = np.sqrt(np.dot(xm.T, np.dot(S, xm))).flatten()[0]
+    #rm = np.dot(p, xm)[0]
+    #vm = np.sqrt(np.dot(xm.T, np.dot(S, xm))).flatten()[0]
     
     # grid for markowitz curve
     N = 100
@@ -69,9 +80,11 @@ if __name__ == '__main__':
     xa = np.zeros((ra.size, n))
     for j in range(N):
            x = portfolio_solver(S, p, ra[j])
+           d = np.multiply(data.as_matrix(), x.transpose()).sum(axis=1)
            if x.size:
                xa[j, :] = x.transpose()
-               va[j] = np.sqrt(np.dot(x.T, np.dot(S, x)))
+               #va[j] = np.sqrt(np.dot(x.T, np.dot(S, x)))
+               va[j] = downside_risk(d, t)
            else:
                xa[j, :] = np.zeros(n)
                va[j] = np.inf
@@ -90,13 +103,13 @@ if __name__ == '__main__':
     # plot
     colors = ['b', 'g', 'r', 'm']
     plt.figure(0, figsize=(8, 6))
-    plt.axis([0.0, 1, 1, 10])
+    #plt.axis([0.0, 1, 1, 10])
     for j in range(n):
-        plt.plot(s[j], np.exp(p[j]), 'o', label=data.columns[j], color=colors[j])
-    plt.plot(va, np.exp(ra), '--', label='optimal', color='c')
+        plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j])
+    plt.plot(va, ra, '-', label='optimal', color='c')
     #plt.plot([0, vt], np.exp([0, rt]), 'o--', label='tangency', color='y')
-    plt.plot(vt, np.exp(rt), '--', label='tangency', color='y')
-    plt.plot(vm, np.exp(rm), 'o', label='mvp', color='k')
+    plt.plot(vt, rt, '-', label='tangency', color='y')
+    plt.plot(vm, rm, 'o', label='mvp', color='k')
 
     #plt.grid(b=True, which='minor', linestyle='--')
     
