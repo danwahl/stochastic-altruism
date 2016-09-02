@@ -56,11 +56,11 @@ if __name__ == '__main__':
     n = data.shape[1]
     N = 1000
     
-    #t = 1.0
+    t = 5.0
     
     # individual returns
     p = data.mean().as_matrix()
-    t = np.min(p)
+    #t = np.min(p)
     s = data.apply(lambda x: downside_risk(x, t), axis=0).as_matrix()
     #s = data.std().as_matrix()
     
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     
     plt.legend(loc='lower right', ncol=3, numpoints=1)
     plt.title('GiveWell charity portfolios')
-    plt.xlabel('Variability')
+    plt.xlabel('Downside risk')
     plt.ylabel('X as cost effective as Cash')
 
     
