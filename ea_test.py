@@ -311,8 +311,10 @@ if __name__ == '__main__':
     key = 'X as cost effective as Cash'
     #data = np.log(np.array([bednets[key], dtw[key], sci[key], iodine[key]])).transpose()
     data = np.array([bednets[key], dtw[key], sci[key], iodine[key]]).transpose()
+    #data = np.array([bednets[key], dtw[key], sci[key]]).transpose()
     #data = np.log(np.array([bednets[key], dtw[key], sci[key]])).transpose()
     df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine'])
+    #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci'])
     #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci'])
     df.to_pickle('data.pickle')
     

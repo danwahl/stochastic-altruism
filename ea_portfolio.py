@@ -96,8 +96,8 @@ if __name__ == '__main__':
         
     colors = ['b', 'g', 'r', 'm', 'k']
     plt.figure(0, figsize=(8, 6))
-    plt.axis([0.0, 2.5, 0, 13])
-    plt.plot(v, r, '.', color='k', alpha=0.05)
+    plt.axis([0.0, 2.5, 1.0, 13.0])
+    plt.plot(v, r, '.', color='k', alpha=0.01)
     plt.plot([0, vt], [1.0, rt], 'k-', label='tangency')
     plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'c-', label='optimal')
     plt.plot(vm[im0], rm[im0], 'yo', label='mvp')
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     nf = 5
     tf = np.linspace(0.0, 1.0, nf)    
     fig, ax = plt.subplots(1, nf, figsize=(8, 2))
-    fig.suptitle("Tangency portfolios, varying % cash", fontsize="x-large")
+    fig.suptitle("Tangency portfolios, varying Cash", fontsize="x-large")
     for j in range(nf):
         xtf = np.append((xm*tf[j]), (1.0 - tf[j]))
         patches = ax[j].pie(xtf, colors=colors, startangle=90)  
