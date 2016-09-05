@@ -8,6 +8,7 @@ Created on Wed Aug 24 20:16:53 2016
 import numpy as np
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 #from matplotlib.patches import Ellipse
 plt.style.use('ggplot')
 
@@ -93,21 +94,38 @@ if __name__ == '__main__':
     rt = r[hull.vertices][it]
     xt = x[hull.vertices][it]
         
-    colors = ['b', 'g', 'r', 'm']
+    colors = ['b', 'g', 'r', 'm', 'k']
     plt.figure(0, figsize=(8, 6))
     plt.axis([0.0, 2.5, 0, 13])
     plt.plot(v, r, '.', color='k', alpha=0.05)
-    plt.plot([0, vt], [1.0, rt], 'y-', label='tangency')
+    plt.plot([0, vt], [1.0, rt], 'k-', label='tangency')
     plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'c-', label='optimal')
-    plt.plot(vm[im0], rm[im0], 'ko', label='mvp')
+    plt.plot(vm[im0], rm[im0], 'yo', label='mvp')
     for j in range(n):
         plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j])
     
     plt.legend(loc='lower right', ncol=3, numpoints=1)
     plt.title('GiveWell charity portfolios')
-    plt.xlabel('Downside risk')
+    plt.xlabel('Downside risk relative to Cash')
     plt.ylabel('X as cost effective as Cash')
-
+    
+    plt.figure(1, figsize=(8, 6))
+    plt.axis('equal')
+    patches, texts = plt.pie(xm, colors=colors, startangle=90)
+    plt.legend(patches, labels=['{} ({:2.1%})'.format(data.columns[i], xm[i]) for i in range(n)], loc='best')
+    plt.title('Minimum variance portfolio')
+    
+    nf = 5
+    tf = np.linspace(0.0, 1.0, nf)    
+    fig, ax = plt.subplots(1, nf, figsize=(8, 2))
+    fig.suptitle("Tangency portfolios, varying % cash", fontsize="x-large")
+    for j in range(nf):
+        xtf = np.append((xm*tf[j]), (1.0 - tf[j]))
+        patches = ax[j].pie(xtf, colors=colors, startangle=90)  
+        ax[j].axis('equal')
+        ax[j].set_xlabel('{:2.1%}'.format(1.0 - tf[j]))
+    
+    plt.show()
     
     '''    
     p = data.mean().as_matrix()
