@@ -23,7 +23,7 @@ def get_rvs(p, n):
         return p['val']
 
 if __name__ == '__main__':
-    n = 100000
+    n = 1000000
     
     with open('params.json') as fp:    
         params = json.load(fp)
@@ -301,7 +301,7 @@ if __name__ == '__main__':
     plt.plot((dtw_x[:-1] + dtw_x[1:])/2.0, dtw_y, label='dtw', color='g')
     plt.plot((sci_x[:-1] + sci_x[1:])/2.0, sci_y, label='sci', color='r')
     plt.plot((iodine_x[:-1] + iodine_x[1:])/2.0, iodine_y, label='iodine', color='m')
-    plt.xlim([0, 30])
+    plt.xlim([0, 25])
     plt.xlabel('X as cost effective as Cash')
     plt.ylabel('Probability')
     plt.title('PDF of cost effectiveness')
