@@ -57,7 +57,7 @@ if __name__ == '__main__':
     n = data.shape[1]
     N = 1000
     
-    t = 5.0
+    t = data['bednets'].mean()
     
     # individual returns
     p = data.mean().as_matrix()
@@ -88,33 +88,34 @@ if __name__ == '__main__':
     xm = x[hull.vertices][im0]
     
     # tangent portfolio
-    sr = (rm - 1.0)/vm
+    sr = (rm - 0.0)/vm
     it = np.argmax(sr)
     vt = v[hull.vertices][it]
     rt = r[hull.vertices][it]
     xt = x[hull.vertices][it]
         
-    colors = ['b', 'g', 'r', 'm', 'k']
+    colors = ['b', 'g', 'r', 'm', 'k', 'w']
     plt.figure(0, figsize=(8, 6))
-    plt.axis([0.0, 2.5, 1.0, 13.0])
-    plt.plot(v, r, '.', color='k', alpha=0.01)
-    plt.plot([0, vt], [1.0, rt], 'k-', label='tangency')
+    plt.axis([0.0, np.max(s)*1.1, 0.0, np.max(p)*1.1])
+    plt.plot(v, r, '.', color='k', alpha=0.1)
+    plt.plot([0, vt], [0.0, rt], 'k-', label='tangency')
     plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'c-', label='optimal')
     plt.plot(vm[im0], rm[im0], 'yo', label='mvp')
     for j in range(n):
         plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j])
     
-    plt.legend(loc='lower right', ncol=3, numpoints=1)
+    plt.legend(loc='lower left', ncol=3, numpoints=1)
     plt.title('GiveWell charity portfolios')
-    plt.xlabel('Downside risk relative to Cash')
-    plt.ylabel('X as cost effective as Cash')
+    plt.xlabel('x')
+    plt.ylabel('y')
     
     plt.figure(1, figsize=(8, 6))
     plt.axis('equal')
     patches, texts = plt.pie(xm, colors=colors, startangle=90)
     plt.legend(patches, labels=['{} ({:2.1%})'.format(data.columns[i], xm[i]) for i in range(n)], loc='best')
-    plt.title('Minimum variance portfolio')
+    #plt.title('Minimum variance portfolio')
     
+    '''
     nf = 5
     tf = np.linspace(0.0, 1.0, nf)    
     fig, ax = plt.subplots(1, nf, figsize=(8, 2))
@@ -125,69 +126,5 @@ if __name__ == '__main__':
         ax[j].axis('equal')
         ax[j].set_xlabel('{:2.1%}'.format(1.0 - tf[j]))
     
-    plt.show()
-    
-    '''    
-    p = data.mean().as_matrix()
-    
-    S = data.cov().as_matrix()
-    #s = data.std().as_matrix()
-    s = data.apply(lambda x: downside_risk(x, t), axis=0).as_matrix()
-    
-    # minimum variance portfolio
-    xm = portfolio_solver(S)
-    dm = np.multiply(data.as_matrix(), xm.transpose()).sum(axis=1)
-    rm = dm.mean()
-    vm = downside_risk(dm, t)
-    
-    # returns and variability
-    #rm = np.dot(p, xm)[0]
-    #vm = np.sqrt(np.dot(xm.T, np.dot(S, xm))).flatten()[0]
-    
-    # grid for markowitz curve
-    N = 100
-    ra = np.linspace(rm, p.max(), N)
-    
-    # generate curve
-    va = np.zeros(ra.shape)
-    xa = np.zeros((ra.size, n))
-    for j in range(N):
-           x = portfolio_solver(S, p, ra[j])
-           d = np.multiply(data.as_matrix(), x.transpose()).sum(axis=1)
-           if x.size:
-               xa[j, :] = x.transpose()
-               #va[j] = np.sqrt(np.dot(x.T, np.dot(S, x)))
-               va[j] = downside_risk(d, t)
-           else:
-               xa[j, :] = np.zeros(n)
-               va[j] = np.inf
-           
-    # tangency portfolio
-    sr = ra/va
-    it = sr.argmax()
-    #rt = ra[it]  
-    #vt = va[it]
-    xt = xa[it, :]
-    
-    yt = np.linspace(0.0, 1.0, N)
-    rt = ra[it]*yt
-    vt = va[it]*yt
-    
-    # plot
-    colors = ['b', 'g', 'r', 'm']
-    plt.figure(0, figsize=(8, 6))
-    #plt.axis([0.0, 1, 1, 10])
-    for j in range(n):
-        plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j])
-    plt.plot(va, ra, '-', label='optimal', color='c')
-    #plt.plot([0, vt], np.exp([0, rt]), 'o--', label='tangency', color='y')
-    plt.plot(vt, rt, '-', label='tangency', color='y')
-    plt.plot(vm, rm, 'o', label='mvp', color='k')
-
-    #plt.grid(b=True, which='minor', linestyle='--')
-    
-    plt.legend(loc='lower right', ncol=3, numpoints=1)
-    plt.title('GiveWell charity portfolios')
-    plt.xlabel('Variability')
-    plt.ylabel('X as cost effective as Cash')
     '''
+    plt.show()

@@ -1,0 +1,237 @@
+{
+    "Donations": {
+        "Ads": {
+            "CPX": {
+                "loc": 0.25, 
+                "scale": 0.0625, 
+                "dist": "norm"
+            }, 
+            "AYL": {
+                "loc": 7.03, 
+                "scale": 0.8, 
+                "dist": "norm"
+            }, 
+            "eggs": {
+                "loc": 0.0, 
+                "scale": 0.0, 
+                "dist": "norm"
+            }, 
+            "dairy": {
+                "loc": 0.0, 
+                "scale": 0.0, 
+                "dist": "norm"
+            }, 
+            "meat": {
+                "loc": 0.007, 
+                "scale": 0.0049, 
+                "dist": "norm"
+            }
+        }, 
+        "Leaflets": {
+            "CPX": {
+                "loc": 0.35, 
+                "scale": 0.0305, 
+                "dist": "norm"
+            }, 
+            "AYL": {
+                "loc": 7.03, 
+                "scale": 0.8, 
+                "dist": "norm"
+            }, 
+            "eggs": {
+                "loc": 0.0051, 
+                "scale": 0.0032, 
+                "dist": "norm"
+            }, 
+            "dairy": {
+                "loc": 0.0071, 
+                "scale": 0.0038, 
+                "dist": "norm"
+            }, 
+            "meat": {
+                "loc": 0.011, 
+                "scale": 0.0048, 
+                "dist": "norm"
+            }
+        }
+    }, 
+    "Animals": {
+        "Pork": {
+            "body": {
+                "dist": "const", 
+                "val": 70000.0
+            }, 
+            "AYLA": {
+                "loc": 0.5, 
+                "scale": 0.0417, 
+                "dist": "norm"
+            }, 
+            "natural": {
+                "shape": 11.0, 
+                "scale": 1.0, 
+                "dist": "lognorm"
+            }, 
+            "PES": {
+                "loc": 2.1035, 
+                "scale": 1.0483, 
+                "dist": "norm"
+            }, 
+            "brain": {
+                "dist": "const", 
+                "val": 180
+            }, 
+            "PED": {
+                "loc": -0.647, 
+                "scale": 0.116, 
+                "dist": "norm"
+            }, 
+            "AEPY": {
+                "loc": 0.373, 
+                "scale": 0.018, 
+                "dist": "norm"
+            }
+        }, 
+        "Eggs": {
+            "body": {
+                "dist": "const", 
+                "val": 2630.0
+            }, 
+            "AYLA": {
+                "loc": 1.27, 
+                "scale": 0.14, 
+                "dist": "norm"
+            }, 
+            "natural": {
+                "shape": 10.0, 
+                "scale": 2.0, 
+                "dist": "lognorm"
+            }, 
+            "PES": {
+                "loc": 1.0, 
+                "scale": 0.25, 
+                "dist": "norm"
+            }, 
+            "brain": {
+                "loc": 2.6, 
+                "scale": 1.8000000000000003, 
+                "dist": "uniform"
+            }, 
+            "PED": {
+                "loc": -0.225, 
+                "scale": 0.0375, 
+                "dist": "norm"
+            }, 
+            "AEPY": {
+                "loc": 1.7443, 
+                "scale": 0.2272, 
+                "dist": "norm"
+            }
+        }, 
+        "Dairy": {
+            "body": {
+                "dist": "const", 
+                "val": 470000.0
+            }, 
+            "AYLA": {
+                "loc": 4.5, 
+                "scale": 0.25, 
+                "dist": "norm"
+            }, 
+            "natural": {
+                "shape": 22.5, 
+                "scale": 2.5, 
+                "dist": "lognorm"
+            }, 
+            "PES": {
+                "loc": 0.65, 
+                "scale": 0.51, 
+                "dist": "norm"
+            }, 
+            "brain": {
+                "dist": "const", 
+                "val": 430
+            }, 
+            "PED": {
+                "loc": -1.47, 
+                "scale": 0.43, 
+                "dist": "norm"
+            }, 
+            "AEPY": {
+                "loc": 0.0043, 
+                "scale": 0.0005, 
+                "dist": "norm"
+            }
+        }, 
+        "Chicken": {
+            "body": {
+                "dist": "const", 
+                "val": 2630.0
+            }, 
+            "AYLA": {
+                "loc": 0.1245, 
+                "scale": 0.0048, 
+                "dist": "norm"
+            }, 
+            "natural": {
+                "shape": 7.0, 
+                "scale": 2.0, 
+                "dist": "lognorm"
+            }, 
+            "PES": {
+                "loc": 0.2355, 
+                "scale": 0.0818, 
+                "dist": "norm"
+            }, 
+            "brain": {
+                "loc": 2.6, 
+                "scale": 4.4, 
+                "dist": "uniform"
+            }, 
+            "PED": {
+                "loc": -0.14, 
+                "scale": 0.07, 
+                "dist": "norm"
+            }, 
+            "AEPY": {
+                "loc": 24.65, 
+                "scale": 0.19, 
+                "dist": "norm"
+            }
+        }, 
+        "Beef": {
+            "body": {
+                "dist": "const", 
+                "val": 470000.0
+            }, 
+            "AYLA": {
+                "loc": 1.25, 
+                "scale": 0.04, 
+                "dist": "norm"
+            }, 
+            "natural": {
+                "shape": 22.5, 
+                "scale": 2.5, 
+                "dist": "lognorm"
+            }, 
+            "PES": {
+                "loc": 1.252, 
+                "scale": 0.451, 
+                "dist": "norm"
+            }, 
+            "brain": {
+                "dist": "const", 
+                "val": 430
+            }, 
+            "PED": {
+                "loc": -0.61, 
+                "scale": 0.215, 
+                "dist": "norm"
+            }, 
+            "AEPY": {
+                "loc": 0.118, 
+                "scale": 0.004, 
+                "dist": "norm"
+            }
+        }
+    }
+}

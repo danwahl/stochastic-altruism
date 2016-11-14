@@ -12,13 +12,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-import pandas as pd
+#import pandas as pd
+
+HUMAN_EQ = 7.41
 
 def get_rvs(p, n):
     if p['dist'] == 'uniform':
         return stats.uniform.rvs(loc=p['loc'], scale=p['scale'], size=n)
     elif p['dist'] == 'norm':
         return stats.norm.rvs(loc=p['loc'], scale=p['scale'], size=n)
+    elif p['dist'] == 'lognorm':
+        return stats.lognorm.rvs(p['shape'], scale=p['scale'], size=n)
     elif p['dist'] == 'array':
         return np.random.choice(p['val'], n)
     else:
@@ -34,10 +38,11 @@ def get_input(key, params):
     return inputs
 
 if __name__ == '__main__':
-    n = 100000
+    n = 1000000
     
-    amount = 100
-    meat = ['Beef', 'Pork', 'Chicken', 'Turkey', 'Fish']
+    amount = 1
+    #meat = ['Beef', 'Pork', 'Chicken', 'Turkey', 'Fish']
+    meat = ['Beef', 'Pork', 'Chicken']
     
     with open('ace_params.json') as fp:    
         params = json.load(fp)
@@ -54,6 +59,9 @@ if __name__ == '__main__':
         
         # AEPY*CEF*AYLA
         animals[a]['X2'] = animals[a]['X1']*animals[a]['AYLA']
+        
+        # eq
+        animals[a]['eq'] = animals[a]['brain']/(0.12*np.power(animals[a]['body'], 2.0/3.0))
     
     for d in donations.keys():
         # "Sum (AEPY*CEF)
@@ -88,15 +96,15 @@ if __name__ == '__main__':
         # Reduction in factory-farmed years
         donations[d]['RFY'] = donations[d]['S2']*donations[d]['AYL']*amount/donations[d]['CPX']
     
-    x = np.linspace(-200.0, 1000.0, 50)
-    ads_y, ads_x = np.histogram(donations['Ads']['RFA'], bins=x, density=True)
-    leaflets_y, leaflets_x = np.histogram(donations['Leaflets']['RFA'], bins=x, density=True)
+    x = np.linspace(-0.5, 2.0, 50)
+    ads_y, ads_x = np.histogram(donations['Ads']['RFY'], bins=x, density=True)
+    leaflets_y, leaflets_x = np.histogram(donations['Leaflets']['RFY'], bins=x, density=True)
 
     plt.figure(0,  figsize=(8, 6))
     #plt.plot((cash_x[:-1] + cash_x[1:])/2.0, cash_y, label='cash', color='k')
     plt.plot((ads_x[:-1] + ads_x[1:])/2.0, ads_y, label='ads', color='b')
     plt.plot((leaflets_x[:-1] + leaflets_x[1:])/2.0, leaflets_y, label='leaflets', color='g')
-    plt.xlim([-200, 1000])
+    plt.xlim([np.min(x), np.max(x)])
     #plt.xlabel('X as cost effective as Cash')
     #plt.ylabel('Probability')
     #plt.title('PDF of cost effectiveness')

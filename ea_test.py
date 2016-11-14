@@ -24,6 +24,7 @@ def get_rvs(p, n):
 
 if __name__ == '__main__':
     n = 1000000
+    m = 1000.0
     
     with open('params.json') as fp:    
         params = json.load(fp)
@@ -161,6 +162,12 @@ if __name__ == '__main__':
     cash['Proportional increase in consumption per dollar'] = \
         cash['Present value of net increase in current and future consumption']/ \
         (cash['Size of transfer per person']/inputs['Cash']['Transfers as a percentage of total cost'])
+    cash['Cost per equivalent life saved'] = \
+        inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
+        inputs['Shared']['DALYs per death of a young child averted']/ \
+        cash['Proportional increase in consumption per dollar']
+    cash['Lives saved per $' + str(m)] = m/cash['Cost per equivalent life saved']
+    
     
     deworming = {}
     deworming['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
@@ -213,6 +220,7 @@ if __name__ == '__main__':
         dtw['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #dtw_p = stats.lognorm.fit(dtw['X as cost effective as Cash'])
     #dtw_d = stats.lognorm(*dtw_p[:-2], loc=dtw_p[-2], scale=dtw_p[-1])
+    dtw['Lives saved per $' + str(m)] = 1000.0/dtw['Cost per equivalent life saved']
     
     sci = {}
     sci['Aggregate adjustment to Baird development effect'] = \
@@ -245,6 +253,8 @@ if __name__ == '__main__':
         sci['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #sci_p = stats.lognorm.fit(sci['X as cost effective as Cash'])
     #sci_d = stats.lognorm(*sci_p[:-2], loc=sci_p[-2], scale=sci_p[-1])
+    sci['Lives saved per $' + str(m)] = 1000.0/sci['Cost per equivalent life saved']        
+        
     bednets['Proportional increase in consumption per dollar'] = \
         inputs['Bednets']['Alternative funders adjustment']* \
         ((1.0/bednets['Cost per person-year of protection, adjusted for insecticide resistance: under-14\'s only'])* \
@@ -261,6 +271,7 @@ if __name__ == '__main__':
         bednets['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #bednets_p = stats.lognorm.fit(bednets['X as cost effective as Cash'])
     #bednets_d = stats.lognorm(*bednets_p[:-2], loc=bednets_p[-2], scale=bednets_p[-1])
+    bednets['Lives saved per $' + str(m)] = 1000.0/bednets['Cost per equivalent life saved']
     
     iodine = {}
     iodine['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
@@ -286,35 +297,43 @@ if __name__ == '__main__':
         (inputs['Iodine']['Cost per person per year']/inputs['Iodine']['Leverage (dollars of impact per dollars spent)'])
     iodine['X as cost effective as Cash'] = \
         iodine['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
+    iodine['Cost per equivalent life saved'] = \
+        inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
+        inputs['Shared']['DALYs per death of a young child averted']/ \
+        iodine['Proportional increase in consumption per dollar']
+    iodine['Lives saved per $' + str(m)] = 1000.0/iodine['Cost per equivalent life saved']
     
-    #x = np.linspace(0.0, 30.0, 50)
-    x = np.logspace(0.0, np.log10(50.0), 50) - 1.0
+    key = 'Lives saved per $' + str(m)  
+    #key = 'X as cost effective as Cash'
+    
+    x = np.linspace(0.0, 1.0, 100)
+    #x = np.logspace(0.0, np.log10(50.0), 50) - 1.0
     #cash_y, cash_x = np.histogram(cash['Proportional increase in consumption per dollar']/np.median(cash['Proportional increase in consumption per dollar']), bins=x, density=True)
-    bednets_y, bednets_x = np.histogram(bednets['X as cost effective as Cash'], bins=x, density=True)
-    dtw_y, dtw_x = np.histogram(dtw['X as cost effective as Cash'], bins=x, density=True)
-    sci_y, sci_x = np.histogram(sci['X as cost effective as Cash'], bins=x, density=True)
-    iodine_y, iodine_x = np.histogram(iodine['X as cost effective as Cash'], bins=x, density=True)
+    cash_y, cash_x = np.histogram(cash[key], bins=x, density=True)    
+    bednets_y, bednets_x = np.histogram(bednets[key], bins=x, density=True)
+    dtw_y, dtw_x = np.histogram(dtw[key], bins=x, density=True)
+    sci_y, sci_x = np.histogram(sci[key], bins=x, density=True)
+    iodine_y, iodine_x = np.histogram(iodine[key], bins=x, density=True)
     
     plt.figure(0,  figsize=(8, 6))
-    #plt.plot((cash_x[:-1] + cash_x[1:])/2.0, cash_y, label='cash', color='k')
+    plt.plot((cash_x[:-1] + cash_x[1:])/2.0, cash_y, label='cash', color='k')
     plt.plot((bednets_x[:-1] + bednets_x[1:])/2.0, bednets_y, label='bednets', color='b')
     plt.plot((dtw_x[:-1] + dtw_x[1:])/2.0, dtw_y, label='dtw', color='g')
     plt.plot((sci_x[:-1] + sci_x[1:])/2.0, sci_y, label='sci', color='r')
     plt.plot((iodine_x[:-1] + iodine_x[1:])/2.0, iodine_y, label='iodine', color='m')
-    plt.xlim([0, 25])
-    plt.xlabel('X as cost effective as Cash')
+    plt.xlim([np.min(x), np.max(x)])
+    plt.xlabel(key)
     plt.ylabel('Probability')
     plt.title('PDF of cost effectiveness')
     plt.legend(loc='upper right')
     plt.show()
     
-    key = 'X as cost effective as Cash'
-    #data = np.log(np.array([bednets[key], dtw[key], sci[key], iodine[key]])).transpose()
-    data = np.array([bednets[key], dtw[key], sci[key], iodine[key]]).transpose()
+    #data = np.array([bednets[key], dtw[key], sci[key], iodine[key]]).transpose()
+    data = np.array([bednets[key], dtw[key], sci[key], iodine[key], cash[key]]).transpose()
     #data = np.array([bednets[key], dtw[key], sci[key]]).transpose()
     #data = np.log(np.array([bednets[key], dtw[key], sci[key]])).transpose()
-    df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine'])
-    #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci'])
+    df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine', 'cash'])
+    #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci', 'iodine'])
     #df = pd.DataFrame(data, columns=['bednets', 'dtw', 'sci'])
     df.to_pickle('data.pickle')
     
