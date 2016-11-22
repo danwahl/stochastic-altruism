@@ -167,7 +167,8 @@ if __name__ == '__main__':
         inputs['Shared']['DALYs per death of a young child averted']/ \
         cash['Proportional increase in consumption per dollar']
     cash['Lives saved per $' + str(m)] = m/cash['Cost per equivalent life saved']
-    
+    cash['$/DALY'] = cash['Cost per equivalent life saved']/inputs['Shared']['DALYs per death of a young child averted']
+    cash['DALYs per $' + str(m)] = m/cash['$/DALY']
     
     deworming = {}
     deworming['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
@@ -220,7 +221,9 @@ if __name__ == '__main__':
         dtw['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #dtw_p = stats.lognorm.fit(dtw['X as cost effective as Cash'])
     #dtw_d = stats.lognorm(*dtw_p[:-2], loc=dtw_p[-2], scale=dtw_p[-1])
-    dtw['Lives saved per $' + str(m)] = 1000.0/dtw['Cost per equivalent life saved']
+    dtw['Lives saved per $' + str(m)] = m/dtw['Cost per equivalent life saved']
+    dtw['$/DALY'] = dtw['Cost per equivalent life saved']/inputs['Shared']['DALYs per death of a young child averted']
+    dtw['DALYs per $' + str(m)] = m/dtw['$/DALY']    
     
     sci = {}
     sci['Aggregate adjustment to Baird development effect'] = \
@@ -253,8 +256,10 @@ if __name__ == '__main__':
         sci['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #sci_p = stats.lognorm.fit(sci['X as cost effective as Cash'])
     #sci_d = stats.lognorm(*sci_p[:-2], loc=sci_p[-2], scale=sci_p[-1])
-    sci['Lives saved per $' + str(m)] = 1000.0/sci['Cost per equivalent life saved']        
-        
+    sci['Lives saved per $' + str(m)] = m/sci['Cost per equivalent life saved']   
+    sci['$/DALY'] = sci['Cost per equivalent life saved']/inputs['Shared']['DALYs per death of a young child averted']
+    sci['DALYs per $' + str(m)] = m/sci['$/DALY']       
+     
     bednets['Proportional increase in consumption per dollar'] = \
         inputs['Bednets']['Alternative funders adjustment']* \
         ((1.0/bednets['Cost per person-year of protection, adjusted for insecticide resistance: under-14\'s only'])* \
@@ -271,7 +276,9 @@ if __name__ == '__main__':
         bednets['Proportional increase in consumption per dollar']/cash['Proportional increase in consumption per dollar']
     #bednets_p = stats.lognorm.fit(bednets['X as cost effective as Cash'])
     #bednets_d = stats.lognorm(*bednets_p[:-2], loc=bednets_p[-2], scale=bednets_p[-1])
-    bednets['Lives saved per $' + str(m)] = 1000.0/bednets['Cost per equivalent life saved']
+    bednets['Lives saved per $' + str(m)] = m/bednets['Cost per equivalent life saved']
+    bednets['$/DALY'] = bednets['Cost per equivalent life saved']/inputs['Shared']['DALYs per death of a young child averted']
+    bednets['DALYs per $' + str(m)] = m/bednets['$/DALY']        
     
     iodine = {}
     iodine['Benefit on one year\'s income (discounted back 10 years because of delay between deworming and working for income)'] = \
@@ -301,12 +308,15 @@ if __name__ == '__main__':
         inputs['Shared']['1 DALY is equivalent to increasing ln(income) by one unit for how many years']* \
         inputs['Shared']['DALYs per death of a young child averted']/ \
         iodine['Proportional increase in consumption per dollar']
-    iodine['Lives saved per $' + str(m)] = 1000.0/iodine['Cost per equivalent life saved']
+    iodine['Lives saved per $' + str(m)] = m/iodine['Cost per equivalent life saved']
+    iodine['$/DALY'] = iodine['Cost per equivalent life saved']/inputs['Shared']['DALYs per death of a young child averted']
+    iodine['DALYs per $' + str(m)] = m/iodine['$/DALY']        
     
-    key = 'Lives saved per $' + str(m)  
+    key = 'DALYs per $' + str(m)    
+    #key = 'Lives saved per $' + str(m)  
     #key = 'X as cost effective as Cash'
     
-    x = np.linspace(0.0, 1.0, 100)
+    x = np.linspace(0.0, 50.0, 100)
     #x = np.logspace(0.0, np.log10(50.0), 50) - 1.0
     #cash_y, cash_x = np.histogram(cash['Proportional increase in consumption per dollar']/np.median(cash['Proportional increase in consumption per dollar']), bins=x, density=True)
     cash_y, cash_x = np.histogram(cash[key], bins=x, density=True)    

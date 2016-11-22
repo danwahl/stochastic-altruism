@@ -53,11 +53,16 @@ def downside_risk(x, t):
     return np.sqrt(np.power(np.minimum(0.0, x - t), 2.0).sum()/x.size)
 
 if __name__ == '__main__':
-    data = pd.read_pickle('data.pickle')
+    ea_data = pd.read_pickle('data.pickle')
+    ace_data = pd.read_pickle('ace_data.pickle')
+    
+    #data = pd.concat([ea_data, ace_data], axis=1)
+    data = ea_data
     n = data.shape[1]
     N = 1000
     
-    t = data['bednets'].mean()
+    #t = data['bednets'].mean()
+    t = 1.5
     
     # individual returns
     p = data.mean().as_matrix()
@@ -94,7 +99,7 @@ if __name__ == '__main__':
     rt = r[hull.vertices][it]
     xt = x[hull.vertices][it]
         
-    colors = ['b', 'g', 'r', 'm', 'k', 'w']
+    colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
     plt.figure(0, figsize=(8, 6))
     plt.axis([0.0, np.max(s)*1.1, 0.0, np.max(p)*1.1])
     plt.plot(v, r, '.', color='k', alpha=0.1)

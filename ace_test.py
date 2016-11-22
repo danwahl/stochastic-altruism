@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-#import pandas as pd
+import pandas as pd
 
 HUMAN_EQ = 7.41
 
@@ -40,7 +40,7 @@ def get_input(key, params):
 if __name__ == '__main__':
     n = 1000000
     
-    amount = 1
+    amount = 1000
     #meat = ['Beef', 'Pork', 'Chicken', 'Turkey', 'Fish']
     meat = ['Beef', 'Pork', 'Chicken']
     
@@ -51,17 +51,17 @@ if __name__ == '__main__':
     donations = get_input('Donations', params)
     
     for a in animals.keys():
+        # eq
+        animals[a]['eq'] = animals[a]['brain']/(0.12*np.power(animals[a]['body'], 2.0/3.0))                
+        
         # cumulative elasticity factor
         animals[a]['CEF'] = animals[a]['PES']/(animals[a]['PES'] - animals[a]['PED'])
     
         # AEPY*CEF
-        animals[a]['X1'] = animals[a]['AEPY']*animals[a]['CEF']
+        animals[a]['X1'] = animals[a]['AEPY']*animals[a]['CEF']*animals[a]['eq']/HUMAN_EQ
         
         # AEPY*CEF*AYLA
         animals[a]['X2'] = animals[a]['X1']*animals[a]['AYLA']
-        
-        # eq
-        animals[a]['eq'] = animals[a]['brain']/(0.12*np.power(animals[a]['body'], 2.0/3.0))
     
     for d in donations.keys():
         # "Sum (AEPY*CEF)
@@ -96,7 +96,7 @@ if __name__ == '__main__':
         # Reduction in factory-farmed years
         donations[d]['RFY'] = donations[d]['S2']*donations[d]['AYL']*amount/donations[d]['CPX']
     
-    x = np.linspace(-0.5, 2.0, 50)
+    x = np.linspace(-10.0, 50.0, 50)
     ads_y, ads_x = np.histogram(donations['Ads']['RFY'], bins=x, density=True)
     leaflets_y, leaflets_x = np.histogram(donations['Leaflets']['RFY'], bins=x, density=True)
 
@@ -110,3 +110,8 @@ if __name__ == '__main__':
     #plt.title('PDF of cost effectiveness')
     plt.legend(loc='upper right')
     plt.show()
+
+    key = 'RFY'    
+    data = np.array([donations['Ads'][key], donations['Leaflets'][key]]).transpose()
+    df = pd.DataFrame(data, columns=['ads', 'leaflets'])
+    df.to_pickle('ace_data.pickle')
