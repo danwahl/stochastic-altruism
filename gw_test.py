@@ -69,39 +69,53 @@ if __name__ == '__main__':
         np.log(cash['Baseline annual consumption per capita (in nominal USD)'])) / \
         np.power((1.0 + inputs['Shared']['Discount rate']), inputs['GD']['Duration of investment benefits (in years) - Standard program'])
     cash['Present value of total future increase in ln(consumption)'] = cash['Present value of future increase in ln(consumption) (excluding the last year)'] + \
-        cash['Present value of increased ln(consumption) in the last year']
+        cash['Present value of increased ln(consumption) in the last year']   
+    
+    cash['Total present value of cash transfer'] = cash['Present value of total future increase in ln(consumption)'] + \
+        cash['Initial increase in ln(consumption)']
+    cash['Proportional increase in consumption per dollar'] = cash['Total present value of cash transfer']* \
+        inputs['GD']['Transfers as a percentage of total cost - Standard program']/ \
+        cash['Size of transfer per person']
+    
+    ubi = {}
+    ubi['Annual transfer size per person over 18 (nominal USD)'] = 0.75*365.25
+    ubi['Average number of people over 18 in each household'] = 2.395555556
+    ubi['Total amount transfered to each household'] = ubi['Annual transfer size per person over 18 (nominal USD)']* \
+        ubi['Average number of people over 18 in each household']
+    ubi['Household size'] = 4.7
+    ubi['Transfer size per person'] = ubi['Total amount transfered to each household']/ubi['Household size']
+    ubi['Annual quantity of transfer money used for immediate consumtion (pre-discounting)'] = \
+        ubi['Transfer size per person']*(1.0 - inputs['UBI']['Percentage of transfers invested - UBI'])
+    ubi['Size of transfer invested each year'] = ubi['Transfer size per person']*inputs['UBI']['Percentage of transfers invested - UBI']
+    ubi['Annual return for each year of transfer investments (pre-discounting)'] = \
+        ubi['Size of transfer invested each year']*inputs['UBI']['Return on investment - UBI']
+    ubi['Value eventually returned from one years investment (pre-discounting)'] = ubi['Size of transfer invested each year'] * \
+        inputs['UBI']['Percent of investment returned when benefits end - UBI']
+    ubi['Duration of program - Long Term Arm'] = 12.0
+    ubi['Duration of program - Short Term Arm'] = 2.0
+    ubi['Baseline consumption per capita'] = 285.922288106034
+    ubi['Inflation for lack of targeting'] = (0.86-0.5)/0.5*0.3
+    ubi['Expected baseline per capita consumption (nominal USD)'] = ubi['Baseline consumption per capita']* \
+        (1.0 + ubi['Inflation for lack of targeting'])
+    ubi['Adjusted per capita consumption (nominal USD)'] = ubi['Expected baseline per capita consumption (nominal USD)']* \
+        inputs['UBI']['Work participation adjustment']
+    ubi['Initial benefit (in terms of ln[consumption])'] = np.log(ubi['Annual quantity of transfer money used for immediate consumtion (pre-discounting)'] + \
+        ubi['Adjusted per capita consumption (nominal USD)']) - \
+        np.log(ubi['Expected baseline per capita consumption (nominal USD)'])
+    ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption])'] = 0
+    ubi['Net present value of entire program (in terms of ln[consumption])'] = 0
+    ubi['Transfers as a percentage of total cost - UBI'] = 0
+    ubi['Per capita transfer cost over entire program - Long Term Arm'] = 0
+    ubi['Proportional increase in consumption per dollar - Long Term Arm'] = 0
+    ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) -Short Term Arm'] = 0
+    ubi['Net present value of entire program (in terms of ln[consumption]) - Short Term Arm'] = 0
+    ubi['Per capita transfer cost over entire program - Short Term Arm'] = 0
+    ubi['Proportional increase in consumption per dollar - Short Term Arm'] = 0
+    ubi['Percent of transfers going to short term arm'] = 0
+    ubi['Percent of transfers going to long term arm'] = 0
+    ubi['Weighted proportion increase in consumption per dollar'] = 0
     
     
-    cash['Total present value of cash transfer'] = 0
-    cash['Proportional increase in consumption per dollar'] = 0
-    cash['Annual transfer size per person over 18 (nominal USD)'] = 0
-    cash['Average number of people over 18 in each household'] = 0
-    cash['Total amount transfered to each household'] = 0
-    cash['Household size'] = 0
-    cash['Transfer size per person'] = 0
-    cash['Annual quantity of transfer money used for immediate consumtion (pre-discounting)'] = 0
-    cash['Size of transfer invested each year'] = 0
-    cash['Annual return for each year of transfer investments (pre-discounting)'] = 0
-    cash['Value eventually returned from one years investment (pre-discounting)'] = 0
-    cash['Duration of program - Long Term Arm'] = 0
-    cash['Duration of program - Short Term Arm'] = 0
-    cash['Baseline consumption per capita'] = 0
-    cash['Inflation for lack of targeting'] = 0
-    cash['Expected baseline per capita consumption (nominal USD)'] = 0
-    cash['Adjusted per capita consumption (nominal USD)'] = 0
-    cash['Initial benefit (in terms of ln[consumption])'] = 0
-    cash['Net present value of benefits beyond initial year of program (in terms of ln[consumption])'] = 0
-    cash['Net present value of entire program (in terms of ln[consumption])'] = 0
-    cash['Transfers as a percentage of total cost - UBI'] = 0
-    cash['Per capita transfer cost over entire program - Long Term Arm'] = 0
-    cash['Proportional increase in consumption per dollar - Long Term Arm'] = 0
-    cash['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) -Short Term Arm'] = 0
-    cash['Net present value of entire program (in terms of ln[consumption]) - Short Term Arm'] = 0
-    cash['Per capita transfer cost over entire program - Short Term Arm'] = 0
-    cash['Proportional increase in consumption per dollar - Short Term Arm'] = 0
-    cash['Percent of transfers going to short term arm'] = 0
-    cash['Percent of transfers going to long term arm'] = 0
-    cash['Weighted proportion increase in consumption per dollar'] = 0
     cash['Standard program and UBI program combined'] = 0
     cash['Weight of UBI program in overall cost-effectiveness of GiveDirectly'] = 0
     cash['Weighted proportional increase in consumption per dollar'] = 0
