@@ -56,13 +56,13 @@ if __name__ == '__main__':
     ea_data = pd.read_pickle('data.pickle')
     ace_data = pd.read_pickle('ace_data.pickle')
     
-    #data = pd.concat([ea_data, ace_data], axis=1)
-    data = ea_data
+    data = pd.concat([ea_data, ace_data], axis=1)
+    #data = ea_data
     n = data.shape[1]
     N = 1000
     
-    #t = data['bednets'].mean()
-    t = 1.5
+    t = data['bednets'].mean()
+    #t = 1.5
     
     # individual returns
     p = data.mean().as_matrix()

@@ -23,8 +23,11 @@ def get_rvs(p, n):
         return p['val']
 
 if __name__ == '__main__':
-    n = 1000000
+    n = 100000
     m = 1000.0
+    key = 'DALYs per $' + str(m)    
+    #key = 'Lives saved per $' + str(m)  
+    #key = 'X as cost effective as Cash'
     
     with open('params.json') as fp:    
         params = json.load(fp)
@@ -35,7 +38,76 @@ if __name__ == '__main__':
         for p in params[k].keys():
             d[p] = get_rvs(params[k][p], n)
         inputs[k] = d
+
+    cash = {}
+    cash['Total size of transfer (in nominal USD)'] = 1000.0    
+    cash['Average household size'] = 4.7
+    cash['Size of transfer per person'] = cash['Total size of transfer (in nominal USD)']/ \
+        cash['Average household size']
+    cash['Amount invested'] = cash['Size of transfer per person']* \
+        inputs['GD']['Percentage of transfers invested - Standard program']
+    cash['Initial increase in consumption'] = (1.0 - inputs['GD']['Percentage of transfers invested - Standard program'])* \
+        cash['Size of transfer per person']
+    cash['Annual increase in consumption made possible by investment returns'] = cash['Amount invested']* \
+        inputs['GD']['Return on investment - Standard program']
+    cash['Baseline annual consumption per capita (in nominal USD)'] = 285.922288106034
+    cash['Initial increase in ln(consumption)'] = np.log(cash['Initial increase in consumption'] + \
+        cash['Baseline annual consumption per capita (in nominal USD)']) - \
+        np.log(cash['Baseline annual consumption per capita (in nominal USD)'])
     
+    cash['Future annual increase in ln(consumption)'] = np.log(cash['Annual increase in consumption made possible by investment returns'] + \
+        cash['Baseline annual consumption per capita (in nominal USD)']) - \
+        np.log(cash['Baseline annual consumption per capita (in nominal USD)'])
+    cash['Present value of future increase in ln(consumption) (excluding the last year)'] = cash['Future annual increase in ln(consumption)']/ \
+        (1.0 + inputs['Shared']['Discount rate'])* \
+        (1.0 - 1.0/np.power((1.0 + inputs['Shared']['Discount rate']), (inputs['GD']['Duration of investment benefits (in years) - Standard program'] - 1.0)))/ \
+        (1.0 - 1.0/(1.0 + inputs['Shared']['Discount rate']))
+    cash['Present value of increased ln(consumption) in the last year'] = \
+        (np.log(cash['Baseline annual consumption per capita (in nominal USD)'] + \
+        cash['Amount invested']* \
+        (inputs['GD']['Return on investment - Standard program'] + inputs['GD']['Percent of investment returned when benefits end - Standard program'])) - \
+        np.log(cash['Baseline annual consumption per capita (in nominal USD)'])) / \
+        np.power((1.0 + inputs['Shared']['Discount rate']), inputs['GD']['Duration of investment benefits (in years) - Standard program'])
+    cash['Present value of total future increase in ln(consumption)'] = cash['Present value of future increase in ln(consumption) (excluding the last year)'] + \
+        cash['Present value of increased ln(consumption) in the last year']
+    
+    
+    cash['Total present value of cash transfer'] = 0
+    cash['Proportional increase in consumption per dollar'] = 0
+    cash['Annual transfer size per person over 18 (nominal USD)'] = 0
+    cash['Average number of people over 18 in each household'] = 0
+    cash['Total amount transfered to each household'] = 0
+    cash['Household size'] = 0
+    cash['Transfer size per person'] = 0
+    cash['Annual quantity of transfer money used for immediate consumtion (pre-discounting)'] = 0
+    cash['Size of transfer invested each year'] = 0
+    cash['Annual return for each year of transfer investments (pre-discounting)'] = 0
+    cash['Value eventually returned from one years investment (pre-discounting)'] = 0
+    cash['Duration of program - Long Term Arm'] = 0
+    cash['Duration of program - Short Term Arm'] = 0
+    cash['Baseline consumption per capita'] = 0
+    cash['Inflation for lack of targeting'] = 0
+    cash['Expected baseline per capita consumption (nominal USD)'] = 0
+    cash['Adjusted per capita consumption (nominal USD)'] = 0
+    cash['Initial benefit (in terms of ln[consumption])'] = 0
+    cash['Net present value of benefits beyond initial year of program (in terms of ln[consumption])'] = 0
+    cash['Net present value of entire program (in terms of ln[consumption])'] = 0
+    cash['Transfers as a percentage of total cost - UBI'] = 0
+    cash['Per capita transfer cost over entire program - Long Term Arm'] = 0
+    cash['Proportional increase in consumption per dollar - Long Term Arm'] = 0
+    cash['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) -Short Term Arm'] = 0
+    cash['Net present value of entire program (in terms of ln[consumption]) - Short Term Arm'] = 0
+    cash['Per capita transfer cost over entire program - Short Term Arm'] = 0
+    cash['Proportional increase in consumption per dollar - Short Term Arm'] = 0
+    cash['Percent of transfers going to short term arm'] = 0
+    cash['Percent of transfers going to long term arm'] = 0
+    cash['Weighted proportion increase in consumption per dollar'] = 0
+    cash['Standard program and UBI program combined'] = 0
+    cash['Weight of UBI program in overall cost-effectiveness of GiveDirectly'] = 0
+    cash['Weighted proportional increase in consumption per dollar'] = 0
+    cash['Cost per life saved equivalent'] = 0
+
+    '''    
     bednets = {}
     bednets['Ratio of mortality rate in 2015 compared to 1995'] = \
         inputs['Bednets']['Under 5 all mortality rate 2015 (per 1000)']/ \
@@ -311,11 +383,9 @@ if __name__ == '__main__':
     iodine['Lives saved per $' + str(m)] = m/iodine['Cost per equivalent life saved']
     iodine['$/DALY'] = iodine['Cost per equivalent life saved']/inputs['Shared']['DALYs per death of a young child averted']
     iodine['DALYs per $' + str(m)] = m/iodine['$/DALY']        
+    '''
     
-    key = 'DALYs per $' + str(m)    
-    #key = 'Lives saved per $' + str(m)  
-    #key = 'X as cost effective as Cash'
-    
+    '''
     x = np.linspace(0.0, 50.0, 100)
     #x = np.logspace(0.0, np.log10(50.0), 50) - 1.0
     #cash_y, cash_x = np.histogram(cash['Proportional increase in consumption per dollar']/np.median(cash['Proportional increase in consumption per dollar']), bins=x, density=True)
@@ -357,4 +427,4 @@ if __name__ == '__main__':
     #plt.xlim([0, x_max])
     #plt.legend(loc='upper right')
     #plt.show()
-    
+    '''  

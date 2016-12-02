@@ -38,9 +38,10 @@ def get_input(key, params):
     return inputs
 
 if __name__ == '__main__':
-    n = 1000000
+    n = 100000
+    m = 1000.0
+    key = 'DALYs per $' + str(m) 
     
-    amount = 1000
     #meat = ['Beef', 'Pork', 'Chicken', 'Turkey', 'Fish']
     meat = ['Beef', 'Pork', 'Chicken']
     
@@ -91,27 +92,28 @@ if __name__ == '__main__':
             donations[d]['S2'] += donations[d]['Z2'][t]
         
         # Total animal reduction on farms
-        donations[d]['RFA'] = donations[d]['S1']*donations[d]['AYL']*amount/donations[d]['CPX']
+        donations[d]['RFA'] = donations[d]['S1']*donations[d]['AYL']*m/donations[d]['CPX']
         
         # Reduction in factory-farmed years
-        donations[d]['RFY'] = donations[d]['S2']*donations[d]['AYL']*amount/donations[d]['CPX']
+        donations[d]['RFY'] = donations[d]['S2']*donations[d]['AYL']*m/donations[d]['CPX']
+
+        # dalys per m        
+        donations[d]['DALYs per $' + str(m)] = donations[d]['RFY']
     
     x = np.linspace(-10.0, 50.0, 50)
     ads_y, ads_x = np.histogram(donations['Ads']['RFY'], bins=x, density=True)
     leaflets_y, leaflets_x = np.histogram(donations['Leaflets']['RFY'], bins=x, density=True)
 
     plt.figure(0,  figsize=(8, 6))
-    #plt.plot((cash_x[:-1] + cash_x[1:])/2.0, cash_y, label='cash', color='k')
     plt.plot((ads_x[:-1] + ads_x[1:])/2.0, ads_y, label='ads', color='b')
     plt.plot((leaflets_x[:-1] + leaflets_x[1:])/2.0, leaflets_y, label='leaflets', color='g')
     plt.xlim([np.min(x), np.max(x)])
-    #plt.xlabel('X as cost effective as Cash')
-    #plt.ylabel('Probability')
-    #plt.title('PDF of cost effectiveness')
+    plt.xlabel(key)
+    plt.ylabel('Probability')
+    plt.title('PDF of cost effectiveness')
     plt.legend(loc='upper right')
     plt.show()
-
-    key = 'RFY'    
+    
     data = np.array([donations['Ads'][key], donations['Leaflets'][key]]).transpose()
     df = pd.DataFrame(data, columns=['ads', 'leaflets'])
     df.to_pickle('ace_data.pickle')
