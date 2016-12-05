@@ -60,6 +60,25 @@ def calc_npv(r, ubi, inputs, n):
         z[i] = np.npv(inputs['Shared']['Discount rate'][i], y[:, i])
     return z
 
+def calc_deworming(s, deworming, inputs):
+    z = {}
+    z['Adjusted total benefits per person dewormed in terms of ln(income)'] = \
+        inputs[s]['Adjustment for benefit varying by treatment frequency']* \
+        (deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption']* \
+        inputs[s]['Proportion of deworming going to children']* \
+        inputs[s]['Prevalence/intensity adjustment'] + \
+        deworming['Short term health benefits of deworing in terms of ln(income)']* \
+        inputs[s]['Prevalence/intensity adjustment'])
+    z['Proportional increase in consumption per dollar'] = \
+        z['Adjusted total benefits per person dewormed in terms of ln(income)']* \
+        inputs[s]['Leverage (dollars of impact per dollar spent)']/ \
+        inputs[s]['Cost per person dewormed (per year)']
+    z['Cost per equivalent life saved'] = \
+        inputs['Shared']['1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years?']* \
+        inputs['AMF']['DALYs averted per death of an under-5 averted - AMF']/ \
+        z['Proportional increase in consumption per dollar']
+    return z
+
 if __name__ == '__main__':
     n = 1000
     m = 1000.0
@@ -182,7 +201,40 @@ if __name__ == '__main__':
     cash['Cost per life saved equivalent'] = inputs['AMF']['DALYs averted per death of an under-5 averted - AMF']* \
         inputs['Shared']['1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years?']/ \
         cash['Weighted proportional increase in consumption per dollar']
-
+    
+    # long term effects
+    deworming = {}
+    deworming['Benefit on one year\'s income (discounted back because of delay between deworming and working for income)'] = \
+        inputs['Deworming']['Treatment effect of deworming on ln(consumption)']/ \
+        np.power((1.0 + inputs['Shared']['Discount rate']), inputs['Deworming']['Average number of years between deworming and the beginning of long term benefits'])
+    deworming['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))'] =  \
+        deworming['Benefit on one year\'s income (discounted back because of delay between deworming and working for income)']* \
+        (1.0 - 1.0/np.power((1.0 + inputs['Shared']['Discount rate']), inputs['Deworming']['Duration of long term benefits of deworming (in years)']))/ \
+        (1.0 - 1.0/(1.0 + inputs['Shared']['Discount rate']))
+    deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption  (before adjusting for alternate funders)'] = \
+        deworming['Present value of the sum of the lifetime benefits per worker (in terms of Ln(income))']* \
+        inputs['Deworming']['Number of household members that benefit - Deworming']* \
+        inputs['Deworming']['Adjustment for El Nino']* \
+        inputs['Deworming']['Proportion of child-years that are as helpful (in terms of developmental effects) as the years in Baird et al.']* \
+        inputs['Deworming']['Proportion of dewormed children that benefited from long term gains in Baird et al.']* \
+        inputs['Deworming']['Replicability adjustment for deworming']/ \
+        inputs['Deworming']['Additional years of treatment assigned to Baird\'s treatment group']
+    deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption'] = \
+        deworming['Adjusted long term benefits per year of treatment (in terms of ln $), assuming income supports household consumption  (before adjusting for alternate funders)']* \
+        inputs['Deworming']['Deworming alternate funders adjustment']
+    
+    # short term effects
+    deworming['Short term health benefits of deworing in terms of ln(income)'] = \
+        inputs['Shared']['1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years?']* \
+        inputs['Deworming']['Short term health benefits of deworming (DALYs averted per person treated)']* \
+        inputs['Deworming']['Deworming alternate funders adjustment']
+    
+    # deworming specific charities
+    dtw = calc_deworming('DtW', deworming, inputs)
+    sci = calc_deworming('SCI', deworming, inputs)
+    ss = calc_deworming('SS', deworming, inputs)
+        
+    
     '''    
     bednets = {}
     bednets['Ratio of mortality rate in 2015 compared to 1995'] = \

@@ -104,7 +104,7 @@
         }
     }, 
     "SCI": {
-        "Leverage (dollars of impact per dollar spent) - SCI": {
+        "Leverage (dollars of impact per dollar spent)": {
             "dist": "array", 
             "val": [
                 1.0, 
@@ -121,7 +121,7 @@
                 1.0
             ]
         }, 
-        "Adjustment for benefit varying by treatment frequency - SCI": {
+        "Adjustment for benefit varying by treatment frequency": {
             "dist": "array", 
             "val": [
                 1.0, 
@@ -138,7 +138,7 @@
                 1.0
             ]
         }, 
-        "Proportion of deworming going to children - SCI": {
+        "Proportion of deworming going to children": {
             "dist": "array", 
             "val": [
                 0.85, 
@@ -155,7 +155,7 @@
                 0.85
             ]
         }, 
-        "Cost per person dewormed (per year) - SCI": {
+        "Cost per person dewormed (per year)": {
             "dist": "array", 
             "val": [
                 0.67, 
@@ -172,7 +172,7 @@
                 0.67
             ]
         }, 
-        "Prevalence/intensity adjustment - SCI": {
+        "Prevalence/intensity adjustment": {
             "dist": "array", 
             "val": [
                 0.18, 
@@ -329,7 +329,7 @@
         }
     }, 
     "SS": {
-        "Leverage (dollars of impact per dollar spent) - Sightsavers": {
+        "Leverage (dollars of impact per dollar spent)": {
             "dist": "array", 
             "val": [
                 1.0, 
@@ -343,21 +343,21 @@
                 1.0
             ]
         }, 
-        "Cost per person dewormed (per year) - Sightsavers": {
+        "Adjustment for benefit varying by treatment frequency": {
             "dist": "array", 
             "val": [
-                0.89, 
-                1.04, 
-                1.04, 
-                0.89, 
-                1.04, 
-                0.89, 
-                1.31, 
-                1.04, 
-                1.31
+                1.0, 
+                0.77, 
+                0.9, 
+                1.0, 
+                0.81, 
+                1.0, 
+                1.0, 
+                0.94, 
+                1.0
             ]
         }, 
-        "Proportion of deworming going to children - Sightsavers": {
+        "Proportion of deworming going to children": {
             "dist": "array", 
             "val": [
                 0.9, 
@@ -371,7 +371,21 @@
                 0.9
             ]
         }, 
-        "Prevalence/intensity adjustment - Sightsavers": {
+        "Cost per person dewormed (per year)": {
+            "dist": "array", 
+            "val": [
+                0.89, 
+                1.04, 
+                1.04, 
+                0.89, 
+                1.04, 
+                0.89, 
+                1.31, 
+                1.04, 
+                1.31
+            ]
+        }, 
+        "Prevalence/intensity adjustment": {
             "dist": "array", 
             "val": [
                 0.1, 
@@ -383,20 +397,6 @@
                 0.1, 
                 0.1, 
                 0.12
-            ]
-        }, 
-        "Adjustment for benefit varying by treatment frequency - Sightsavers": {
-            "dist": "array", 
-            "val": [
-                1.0, 
-                0.77, 
-                0.9, 
-                1.0, 
-                0.81, 
-                1.0, 
-                1.0, 
-                0.94, 
-                1.0
             ]
         }
     }, 
@@ -558,58 +558,7 @@
         }
     }, 
     "DtW": {
-        "Adjustment for benefit varying by treatment frequency - DtW": {
-            "dist": "array", 
-            "val": [
-                0.81, 
-                0.81, 
-                0.77, 
-                0.9, 
-                1.0, 
-                0.81, 
-                0.81, 
-                1.0, 
-                1.0, 
-                1.0, 
-                0.87, 
-                1.0
-            ]
-        }, 
-        "Cost per person dewormed (per year) - DtW": {
-            "dist": "array", 
-            "val": [
-                0.65, 
-                0.5, 
-                0.53, 
-                0.5, 
-                0.5, 
-                0.8, 
-                0.65, 
-                0.67, 
-                0.5, 
-                0.65, 
-                0.5, 
-                0.53
-            ]
-        }, 
-        "Proportion of deworming going to children - DtW": {
-            "dist": "array", 
-            "val": [
-                1.0, 
-                1.0, 
-                1.0, 
-                0.9, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.0, 
-                1.0
-            ]
-        }, 
-        "Leverage (dollars of impact per dollar spent) - DtW": {
+        "Leverage (dollars of impact per dollar spent)": {
             "dist": "array", 
             "val": [
                 1.0, 
@@ -626,7 +575,58 @@
                 1.17
             ]
         }, 
-        "Prevalence/intensity adjustment - DtW": {
+        "Adjustment for benefit varying by treatment frequency": {
+            "dist": "array", 
+            "val": [
+                0.81, 
+                0.81, 
+                0.77, 
+                0.9, 
+                1.0, 
+                0.81, 
+                0.81, 
+                1.0, 
+                1.0, 
+                1.0, 
+                0.87, 
+                1.0
+            ]
+        }, 
+        "Proportion of deworming going to children": {
+            "dist": "array", 
+            "val": [
+                1.0, 
+                1.0, 
+                1.0, 
+                0.9, 
+                1.0, 
+                1.0, 
+                1.0, 
+                1.0, 
+                1.0, 
+                1.0, 
+                1.0, 
+                1.0
+            ]
+        }, 
+        "Cost per person dewormed (per year)": {
+            "dist": "array", 
+            "val": [
+                0.65, 
+                0.5, 
+                0.53, 
+                0.5, 
+                0.5, 
+                0.8, 
+                0.65, 
+                0.67, 
+                0.5, 
+                0.65, 
+                0.5, 
+                0.53
+            ]
+        }, 
+        "Prevalence/intensity adjustment": {
             "dist": "array", 
             "val": [
                 0.15, 

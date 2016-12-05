@@ -23,23 +23,23 @@ if __name__ == '__main__':
         'Deworming alternate funders adjustment': {'dist': 'array', 'val': [0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.89]}, \
         'Additional years of treatment assigned to Baird\'s treatment group': {'dist': 'array', 'val': [2.41, 2.41, 2.41, 2.41, 2.41, 2.41, 2.41, 2.41, 2.41, 2.41, 2.41, 2.41]}}
             
-    dtw = {'Prevalence/intensity adjustment - DtW': {'dist': 'array', 'val': [0.15, 0.17, 0.12, 0.12, 0.12, 0.09, 0.21, 0.17, 0.17, 0.09, 0.17, 0.1]}, \
-        'Adjustment for benefit varying by treatment frequency - DtW': {'dist': 'array', 'val': [0.81, 0.81, 0.77, 0.9, 1.0, 0.81, 0.81, 1.0, 1.0, 1.0, 0.87, 1.0]}, \
-        'Leverage (dollars of impact per dollar spent) - DtW': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 1.17, 1.0, 1.0, 1.17, 1.0, 1.1, 1.0, 1.0, 1.17]}, \
-        'Proportion of deworming going to children - DtW': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
-        'Cost per person dewormed (per year) - DtW': {'dist': 'array', 'val': [0.65, 0.5, 0.53, 0.5, 0.5, 0.8, 0.65, 0.67, 0.5, 0.65, 0.5, 0.53]}}
+    dtw = {'Prevalence/intensity adjustment': {'dist': 'array', 'val': [0.15, 0.17, 0.12, 0.12, 0.12, 0.09, 0.21, 0.17, 0.17, 0.09, 0.17, 0.1]}, \
+        'Adjustment for benefit varying by treatment frequency': {'dist': 'array', 'val': [0.81, 0.81, 0.77, 0.9, 1.0, 0.81, 0.81, 1.0, 1.0, 1.0, 0.87, 1.0]}, \
+        'Leverage (dollars of impact per dollar spent)': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 1.17, 1.0, 1.0, 1.17, 1.0, 1.1, 1.0, 1.0, 1.17]}, \
+        'Proportion of deworming going to children': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
+        'Cost per person dewormed (per year)': {'dist': 'array', 'val': [0.65, 0.5, 0.53, 0.5, 0.5, 0.8, 0.65, 0.67, 0.5, 0.65, 0.5, 0.53]}}
         
-    sci = {'Leverage (dollars of impact per dollar spent) - SCI': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
-        'Prevalence/intensity adjustment - SCI': {'dist': 'array', 'val': [0.18, 0.2, 0.12, 0.09, 0.11, 0.18, 0.17, 0.12, 0.2, 0.1, 0.2, 0.12]}, \
-        'Cost per person dewormed (per year) - SCI': {'dist': 'array', 'val': [0.67, 0.67, 0.49, 0.67, 0.67, 0.67, 0.84, 0.67, 0.67, 1.19, 0.84, 0.67]}, \
-        'Adjustment for benefit varying by treatment frequency - SCI': {'dist': 'array', 'val': [1.0, 1.0, 0.77, 0.9, 1.0, 0.81, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
-        'Proportion of deworming going to children - SCI': {'dist': 'array', 'val': [0.85, 0.85, 0.83, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]}}
+    sci = {'Leverage (dollars of impact per dollar spent)': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
+        'Prevalence/intensity adjustment': {'dist': 'array', 'val': [0.18, 0.2, 0.12, 0.09, 0.11, 0.18, 0.17, 0.12, 0.2, 0.1, 0.2, 0.12]}, \
+        'Cost per person dewormed (per year)': {'dist': 'array', 'val': [0.67, 0.67, 0.49, 0.67, 0.67, 0.67, 0.84, 0.67, 0.67, 1.19, 0.84, 0.67]}, \
+        'Adjustment for benefit varying by treatment frequency': {'dist': 'array', 'val': [1.0, 1.0, 0.77, 0.9, 1.0, 0.81, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
+        'Proportion of deworming going to children': {'dist': 'array', 'val': [0.85, 0.85, 0.83, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85]}}
 
-    ss = {'Leverage (dollars of impact per dollar spent) - Sightsavers': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
-        'Prevalence/intensity adjustment - Sightsavers': {'dist': 'array', 'val': [0.1, 0.11, 0.09, 0.11, 0.12, 0.2, 0.1, 0.1, 0.12]}, \
-        'Cost per person dewormed (per year) - Sightsavers': {'dist': 'array', 'val': [0.89, 1.04, 1.04, 0.89, 1.04, 0.89, 1.31, 1.04, 1.31]}, \
-        'Adjustment for benefit varying by treatment frequency - Sightsavers': {'dist': 'array', 'val': [1.0, 0.77, 0.9, 1.0, 0.81, 1.0, 1.0, 0.94, 1.0]}, \
-        'Proportion of deworming going to children - Sightsavers': {'dist': 'array', 'val': [0.9, 0.9, 0.9, 0.85, 0.9, 0.8, 0.9, 0.9, 0.9]}}
+    ss = {'Leverage (dollars of impact per dollar spent)': {'dist': 'array', 'val': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]}, \
+        'Prevalence/intensity adjustment': {'dist': 'array', 'val': [0.1, 0.11, 0.09, 0.11, 0.12, 0.2, 0.1, 0.1, 0.12]}, \
+        'Cost per person dewormed (per year)': {'dist': 'array', 'val': [0.89, 1.04, 1.04, 0.89, 1.04, 0.89, 1.31, 1.04, 1.31]}, \
+        'Adjustment for benefit varying by treatment frequency': {'dist': 'array', 'val': [1.0, 0.77, 0.9, 1.0, 0.81, 1.0, 1.0, 0.94, 1.0]}, \
+        'Proportion of deworming going to children': {'dist': 'array', 'val': [0.9, 0.9, 0.9, 0.85, 0.9, 0.8, 0.9, 0.9, 0.9]}}
 
     gd = {'Percentage of transfers invested - Standard program': {'dist': 'array', 'val': [0.4, 0.39, 0.39, 0.3, 0.39, 0.5, 0.39, 0.39, 0.39, 0.33, 0.39, 0.39]}, \
         'Return on investment - Standard program': {'dist': 'array', 'val': [0.1, 0.15, 0.1, 0.1, 0.1, 0.1, 0.1, 0.12, 0.1, 0.1, 0.1, 0.1]}, \
