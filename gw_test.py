@@ -22,8 +22,46 @@ def get_rvs(p, n):
     else:
         return p['val']
 
+def calc_npv(r, ubi, inputs, n):
+    x = np.zeros((ubi['Years Post Transfer'], n))
+    y = np.zeros((ubi['Years Post Transfer'], n))
+    
+    # iterate through years of benefits
+    for j in range(1, ubi['Years Post Transfer'] + 1):
+        # sum benefits during program
+        if(j < r):
+            x[j - 1] += ubi['Expected baseline per capita consumption (nominal USD)']* \
+                np.power((1.0 + inputs['UBI']['Expected annual consumption increase (without the UBI program)']), float(j))* \
+                inputs['UBI']['Work participation adjustment'] + \
+                ubi['Annual quantity of transfer money used for immediate consumtion (pre-discounting)']
+        # benefits after program
+        else:
+            x[j - 1] += ubi['Expected baseline per capita consumption (nominal USD)']* \
+                np.power((1.0 + inputs['UBI']['Expected annual consumption increase (without the UBI program)']), float(j))
+        
+        # investments calculations
+        for k in range(n):
+            if(j < r + inputs['UBI']['Duration of investment benefits (in years) - UBI'][k]):
+                x[j - 1][k] += ubi['Annual return for each year of transfer investments (pre-discounting)'][k]* \
+                    np.min([j, inputs['UBI']['Duration of investment benefits (in years) - UBI'][k], \
+                    r, (inputs['UBI']['Duration of investment benefits (in years) - UBI'][k] + r - j)])
+            
+                if(j > r):
+                    x[j - 1][k] += ubi['Value eventually returned from one years investment (pre-discounting)'][k]
+                    
+        # log transform and subtact baseline
+        y[j - 1] = np.log(x[j - 1])
+        y[j - 1] -= np.log(ubi['Expected baseline per capita consumption (nominal USD)']* \
+            np.power((1.0 + inputs['UBI']['Expected annual consumption increase (without the UBI program)']), float(j)))
+    
+    # npv on yearly data
+    z = np.zeros(n)
+    for i in range(n):
+        z[i] = np.npv(inputs['Shared']['Discount rate'][i], y[:, i])
+    return z
+
 if __name__ == '__main__':
-    n = 100000
+    n = 1000
     m = 1000.0
     key = 'DALYs per $' + str(m)    
     #key = 'Lives saved per $' + str(m)  
@@ -102,24 +140,48 @@ if __name__ == '__main__':
     ubi['Initial benefit (in terms of ln[consumption])'] = np.log(ubi['Annual quantity of transfer money used for immediate consumtion (pre-discounting)'] + \
         ubi['Adjusted per capita consumption (nominal USD)']) - \
         np.log(ubi['Expected baseline per capita consumption (nominal USD)'])
-    ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption])'] = 0
-    ubi['Net present value of entire program (in terms of ln[consumption])'] = 0
-    ubi['Transfers as a percentage of total cost - UBI'] = 0
-    ubi['Per capita transfer cost over entire program - Long Term Arm'] = 0
-    ubi['Proportional increase in consumption per dollar - Long Term Arm'] = 0
-    ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) -Short Term Arm'] = 0
-    ubi['Net present value of entire program (in terms of ln[consumption]) - Short Term Arm'] = 0
-    ubi['Per capita transfer cost over entire program - Short Term Arm'] = 0
-    ubi['Proportional increase in consumption per dollar - Short Term Arm'] = 0
-    ubi['Percent of transfers going to short term arm'] = 0
-    ubi['Percent of transfers going to long term arm'] = 0
-    ubi['Weighted proportion increase in consumption per dollar'] = 0
+        
+
+    ubi['Years Post Transfer'] = 100
+    ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) - Long Term Arm'] = \
+        calc_npv(ubi['Duration of program - Long Term Arm'], ubi, inputs, n)
+    ubi['Net present value of entire program (in terms of ln[consumption]) - Long Term Arm'] = \
+        ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) - Long Term Arm'] + \
+        ubi['Initial benefit (in terms of ln[consumption])']
+    ubi['Efficiency of UBI program relative to standard program'] = 0.93
+    ubi['Transfers as a percentage of total cost - UBI'] = inputs['GD']['Transfers as a percentage of total cost - Standard program']* \
+        ubi['Efficiency of UBI program relative to standard program']
+    ubi['Per capita transfer cost over entire program - Long Term Arm'] = ubi['Transfer size per person']* \
+        ubi['Duration of program - Long Term Arm']/ubi['Transfers as a percentage of total cost - UBI']
+    ubi['Proportional increase in consumption per dollar - Long Term Arm'] = \
+        ubi['Net present value of entire program (in terms of ln[consumption]) - Long Term Arm']/ \
+        ubi['Per capita transfer cost over entire program - Long Term Arm']
     
+    ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) - Short Term Arm'] = \
+        calc_npv(ubi['Duration of program - Short Term Arm'], ubi, inputs, n)
+    ubi['Net present value of entire program (in terms of ln[consumption]) - Short Term Arm'] = \
+        ubi['Net present value of benefits beyond initial year of program (in terms of ln[consumption]) - Short Term Arm'] + \
+        ubi['Initial benefit (in terms of ln[consumption])']
+    ubi['Per capita transfer cost over entire program - Short Term Arm'] = ubi['Transfer size per person']* \
+        ubi['Duration of program - Short Term Arm']/ubi['Transfers as a percentage of total cost - UBI']
+    ubi['Proportional increase in consumption per dollar - Short Term Arm'] =  \
+        ubi['Net present value of entire program (in terms of ln[consumption]) - Short Term Arm']/ \
+        ubi['Per capita transfer cost over entire program - Short Term Arm']
     
-    cash['Standard program and UBI program combined'] = 0
-    cash['Weight of UBI program in overall cost-effectiveness of GiveDirectly'] = 0
-    cash['Weighted proportional increase in consumption per dollar'] = 0
-    cash['Cost per life saved equivalent'] = 0
+    ubi['Percent of transfers going to short term arm'] = 7.9/30.0
+    ubi['Percent of transfers going to long term arm'] = 1.0 - ubi['Percent of transfers going to short term arm']
+    ubi['Weighted proportion increase in consumption per dollar'] = ubi['Percent of transfers going to short term arm']* \
+        ubi['Proportional increase in consumption per dollar - Short Term Arm'] + \
+        ubi['Percent of transfers going to long term arm']*ubi['Proportional increase in consumption per dollar - Long Term Arm']
+    
+    cash['Weight of UBI program in overall cost-effectiveness of GiveDirectly'] = 1.0 - \
+        inputs['GD']['Weight of standard program in overall cost-effectiveness of GiveDirectly']
+    cash['Weighted proportional increase in consumption per dollar'] = inputs['GD']['Weight of standard program in overall cost-effectiveness of GiveDirectly']* \
+        cash['Proportional increase in consumption per dollar'] + ubi['Weighted proportion increase in consumption per dollar']* \
+        cash['Weight of UBI program in overall cost-effectiveness of GiveDirectly']
+    cash['Cost per life saved equivalent'] = inputs['AMF']['DALYs averted per death of an under-5 averted - AMF']* \
+        inputs['Shared']['1 DALY averted is equivalent to increasing ln(consumption) by one unit for one individual for how many years?']/ \
+        cash['Weighted proportional increase in consumption per dollar']
 
     '''    
     bednets = {}
