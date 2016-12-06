@@ -61,7 +61,7 @@ if __name__ == '__main__':
     n = data.shape[1]
     N = 1000
     
-    t = data['bednets'].mean()
+    t = data['dtw'].mean()
     #t = 1.5
     
     # individual returns
