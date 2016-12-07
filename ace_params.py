@@ -22,7 +22,8 @@ if __name__ == '__main__':
         'PES': {'dist': 'norm', 'loc': 1.252, 'scale': 0.451}, \
         'brain': {'dist': 'const', 'val': 430}, \
         'body': {'dist': 'const', 'val': 470e3}, \
-        'natural': {'dist': 'lognorm', 'shape': 22.5, 'scale': 2.5}
+        'natural': {'dist': 'lognorm', 'shape': 22.5, 'scale': 2.5}, \
+        'weight': {'dist': 'const', 'val': 0.4}
     }
     
     dairy = {'AEPY': {'dist': 'norm', 'loc': 0.0043, 'scale': 0.0005}, \
@@ -31,7 +32,8 @@ if __name__ == '__main__':
         'PES': {'dist': 'norm', 'loc': 0.650, 'scale': 0.510}, \
         'brain': {'dist': 'const', 'val': 430}, \
         'body': {'dist': 'const', 'val': 470e3}, \
-        'natural': {'dist': 'lognorm', 'shape': 22.5, 'scale': 2.5}
+        'natural': {'dist': 'lognorm', 'shape': 22.5, 'scale': 2.5}, \
+        'weight': {'dist': 'const', 'val': 0.72}
     }
     
     pork = {'AEPY': {'dist': 'norm', 'loc': 0.373, 'scale': 0.018}, \
@@ -40,7 +42,8 @@ if __name__ == '__main__':
         'PES': {'dist': 'norm', 'loc': 2.1035, 'scale': 1.0483}, \
         'brain': {'dist': 'const', 'val': 180}, \
         'body': {'dist': 'const', 'val': 70e3}, \
-        'natural': {'dist': 'lognorm', 'shape': 11.0, 'scale': 1.0}
+        'natural': {'dist': 'lognorm', 'shape': 11.0, 'scale': 1.0}, \
+        'weight': {'dist': 'const', 'val': 0.72}
     }
     
     chicken = {'AEPY': {'dist': 'norm', 'loc': 24.65, 'scale': 0.19}, \
@@ -49,7 +52,8 @@ if __name__ == '__main__':
         'PES': {'dist': 'norm', 'loc': 0.2355, 'scale': 0.0818}, \
         'brain': {'dist': 'uniform', 'loc': 2.6, 'scale': 4.4}, \
         'body': {'dist': 'const', 'val': 2.63e3}, \
-        'natural': {'dist': 'lognorm', 'shape': 7.0, 'scale': 2.0}
+        'natural': {'dist': 'lognorm', 'shape': 7.0, 'scale': 2.0}, \
+        'weight': {'dist': 'const', 'val': 0.72}
     }
     
     eggs = {'AEPY': {'dist': 'norm', 'loc': 1.7443, 'scale': 0.2272}, \
@@ -58,7 +62,8 @@ if __name__ == '__main__':
         'PES': {'dist': 'norm', 'loc': 1.0, 'scale': 0.25}, \
         'brain': {'dist': 'uniform', 'loc': 2.6, 'scale': (4.4 - 2.6)}, \
         'body': {'dist': 'const', 'val': 2.63e3}, \
-        'natural': {'dist': 'lognorm', 'shape': 10.0, 'scale': 2.0}
+        'natural': {'dist': 'lognorm', 'shape': 10.0, 'scale': 2.0}, \
+        'weight': {'dist': 'const', 'val': 1.0}
     }
     '''   
     turkey = {'AEPY': {'dist': 'norm', 'loc': 0.779, 'scale': 0.014}, \
@@ -72,7 +77,8 @@ if __name__ == '__main__':
         'PED': {'dist': 'norm', 'loc': -1.05, 'scale': 0.48}, \
         'PES': {'dist': 'norm', 'loc': 0.8, 'scale': 0.265}, \
         'brain': {'dist': 'const', 'val': 430}, \
-        'body': {'dist': 'const', 'val': 470e3}
+        'body': {'dist': 'const', 'val': 470e3}, \
+        'weight': {'dist': 'const', 'val': 0.36}
     }
     
     shellfish = {'AEPY': {'dist': 'norm', 'loc': 118.0, 'scale': 7.08}, \

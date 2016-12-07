@@ -441,8 +441,6 @@ if __name__ == '__main__':
     smc['Percent of SMC\'s cost-effectiveness coming from development effects'] = smc['Proportional increase in consumption per dollar equivalent from developmental benefits']/ \
         smc['Proportional increase in consumption per dollar equivalent overall']
     
-    
-
     # generate pdfs
     x = np.linspace(0.0, 50.0, 100)
     cash_y, cash_x = np.histogram(cash[key], bins=x, density=True)    
@@ -472,7 +470,7 @@ if __name__ == '__main__':
     # export data
     data = np.array([dtw[key], sci[key], ss[key], cash[key], bednets[key], smc[key]]).transpose()
     df = pd.DataFrame(data, columns=['dtw', 'sci', 'ss', 'cash', 'bednets', 'smc'])    
-    df.to_pickle('data.pickle')
+    df.to_pickle('gw_data.pickle')
     
     '''    
     bednets = {}

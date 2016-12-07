@@ -15,6 +15,7 @@ plt.style.use('ggplot')
 import pandas as pd
 
 HUMAN_EQ = 7.41
+DALY_WEIGHT = 0.9
 
 def get_rvs(p, n):
     if p['dist'] == 'uniform':
@@ -59,7 +60,8 @@ if __name__ == '__main__':
         animals[a]['CEF'] = animals[a]['PES']/(animals[a]['PES'] - animals[a]['PED'])
     
         # AEPY*CEF
-        animals[a]['X1'] = animals[a]['AEPY']*animals[a]['CEF']*animals[a]['eq']/HUMAN_EQ
+        animals[a]['X1'] = animals[a]['AEPY']*animals[a]['CEF']*animals[a]['weight']*animals[a]['eq']/HUMAN_EQ
+        #animals[a]['X1'] = animals[a]['AEPY']*animals[a]['CEF']
         
         # AEPY*CEF*AYLA
         animals[a]['X2'] = animals[a]['X1']*animals[a]['AYLA']

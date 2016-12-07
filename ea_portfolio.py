@@ -50,19 +50,18 @@ def portfolio_solver(S, p=np.empty(0), r=0.0):
         return np.empty(0)
 '''
 def downside_risk(x, t):
-    return np.sqrt(np.power(np.minimum(0.0, x - t), 2.0).sum()/x.size)
+    return np.sqrt((np.minimum(0.0, x - t)**2).sum()/x.size)
 
 if __name__ == '__main__':
-    ea_data = pd.read_pickle('data.pickle')
+    gw_data = pd.read_pickle('gw_data.pickle')
     ace_data = pd.read_pickle('ace_data.pickle')
     
-    data = pd.concat([ea_data, ace_data], axis=1)
-    #data = ea_data
+    #data = pd.concat([gw_data, ace_data], axis=1)
+    data = gw_data
     n = data.shape[1]
-    N = 1000
+    N = 10000
     
-    t = data['dtw'].mean()
-    #t = 1.5
+    t = data['bednets'].mean()
     
     # individual returns
     p = data.mean().as_matrix()
@@ -98,19 +97,20 @@ if __name__ == '__main__':
     vt = v[hull.vertices][it]
     rt = r[hull.vertices][it]
     xt = x[hull.vertices][it]
-        
-    colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
+    
+    colors = plt.cm.viridis(np.linspace(0.0, 1.0, n))
     plt.figure(0, figsize=(8, 6))
     plt.axis([0.0, np.max(s)*1.1, 0.0, np.max(p)*1.1])
-    plt.plot(v, r, '.', color='k', alpha=0.1)
-    plt.plot([0, vt], [0.0, rt], 'k-', label='tangency')
-    plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'c-', label='optimal')
-    plt.plot(vm[im0], rm[im0], 'yo', label='mvp')
+    #plt.axis([0.0, 10.0, 0.0, np.max(p)*1.1])
+    plt.plot(v, r, '.', color='k', alpha=0.01)
+    #plt.plot([0, vt], [0.0, rt], 'k-', label='tangency')
+    plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'k-', label='optimal')
+    plt.plot(vm[im0], rm[im0], 'wo', label='mvp', markersize=10)
     for j in range(n):
-        plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j])
+        plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j], markersize=10)
     
-    plt.legend(loc='lower left', ncol=3, numpoints=1)
-    plt.title('GiveWell charity portfolios')
+    plt.legend(loc='best', ncol=3, numpoints=1)
+    plt.title('charity portfolios')
     plt.xlabel('x')
     plt.ylabel('y')
     
