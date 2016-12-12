@@ -72,7 +72,19 @@ if __name__ == '__main__':
         'ITN alternative funders adjustment': {'dist': 'array', 'val': [0.78, 0.78, 0.78, 0.6, 0.78, 0.78, 0.78, 0.78, 0.78, 0.78, 0.78, 0.75]}, \
         'External validity adjustment for declines in malaria mortality (to make ITN model consistent with SMC model) - Autocalculated': {'dist': 'array', 'val': [0.83, 1.0, 0.77, 0.77, 0.77, 1.0, 0.77, 0.77, 0.77, 0.77, 0.77, 0.77]}}
     
-    params = {'Shared': shared, 'Deworming': deworming, 'SCI': sci, 'DtW': dtw, 'SS': ss, 'GD': gd, 'UBI': ubi, 'SMC': smc, 'AMF': amf}
+    # added random iodine parameters for six missing gw staff (from mid-2016 update)
+    iodine = {'Cost per person per year': {'dist': 'array', 'val': [0.1, 0.1, 0.08, 0.08, 0.08, 0.08, 0.05, 0.05, 0.1, 0.1]}, \
+        'Replicability': {'dist': 'array', 'val': [0.8, 0.7, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.7, 0.7]}, \
+        'External validity': {'dist': 'array', 'val': [0.7, 0.7, 0.7, 0.7]}, \
+        'Leverage (dollars of impact per dollars spent)': {'dist': 'array', 'val': [1.0, 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0]}, \
+        '% of benefit of iodine that lasts for the long term': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 1.0, 0.4, 0.4]}, \
+        'Probability that GAIN/ICCIDD has an impact': {'dist': 'array', 'val': [0.5, 0.25, 0.5, 0.5, 0.5, 0.5, 0.75, 0.75, 0.25, 0.25]}, \
+        '% of children that benefit': {'dist': 'array', 'val': [0.8, 0.8, 0.8, 1.0, 0.8, 0.8, 1.0, 1.0, 0.332, 0.332]}, \
+        'Equivalent increase in wages from having iodine throughout childhood': {'dist': 'array', 'val': [0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.027, 0.027, 0.054, 0.054]}, \
+        'Years of Childhood (for iodine)': {'dist': 'const', 'val': 15.0}, \
+        'Percent of population under 15': {'dist': 'const', 'val': 0.431}}    
+    
+    params = {'Shared': shared, 'Deworming': deworming, 'SCI': sci, 'DtW': dtw, 'SS': ss, 'GD': gd, 'UBI': ubi, 'SMC': smc, 'AMF': amf, 'Iodine': iodine}
     
     with open('params.json', 'w') as fp:
         json.dump(params, fp, indent=4)

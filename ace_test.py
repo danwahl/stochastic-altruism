@@ -15,7 +15,6 @@ plt.style.use('ggplot')
 import pandas as pd
 
 HUMAN_EQ = 7.41
-DALY_WEIGHT = 0.9
 
 def get_rvs(p, n):
     if p['dist'] == 'uniform':
@@ -102,19 +101,21 @@ if __name__ == '__main__':
         # dalys per m        
         donations[d]['DALYs per $' + str(m)] = donations[d]['RFY']
     
-    x = np.linspace(-10.0, 50.0, 50)
-    ads_y, ads_x = np.histogram(donations['Ads']['RFY'], bins=x, density=True)
-    leaflets_y, leaflets_x = np.histogram(donations['Leaflets']['RFY'], bins=x, density=True)
+    '''
+    x = np.linspace(0.0, 25.0, 100)
+    ads_y, ads_x = np.histogram(donations['Ads'][key], bins=x, density=True)
+    leaflets_y, leaflets_x = np.histogram(donations['Leaflets'][key], bins=x, density=True)
 
     plt.figure(0,  figsize=(8, 6))
-    plt.plot((ads_x[:-1] + ads_x[1:])/2.0, ads_y, label='ads', color='b')
-    plt.plot((leaflets_x[:-1] + leaflets_x[1:])/2.0, leaflets_y, label='leaflets', color='g')
+    plt.plot((ads_x[:-1] + ads_x[1:])/2.0, ads_y, label='ads', linewidth=2.0, color='w')
+    plt.plot((leaflets_x[:-1] + leaflets_x[1:])/2.0, leaflets_y, label='leaflets', linewidth=2.0, color='c')
     plt.xlim([np.min(x), np.max(x)])
     plt.xlabel(key)
     plt.ylabel('Probability')
     plt.title('PDF of cost effectiveness')
     plt.legend(loc='upper right')
     plt.show()
+    '''
     
     data = np.array([donations['Ads'][key], donations['Leaflets'][key]]).transpose()
     df = pd.DataFrame(data, columns=['ads', 'leaflets'])

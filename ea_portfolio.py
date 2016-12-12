@@ -8,9 +8,11 @@ Created on Wed Aug 24 20:16:53 2016
 import numpy as np
 
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
+#import matplotlib.patches as mpatches
 #from matplotlib.patches import Ellipse
 plt.style.use('ggplot')
+
+import random
 
 #import cvxopt as opt
 #from cvxopt import solvers
@@ -56,17 +58,21 @@ if __name__ == '__main__':
     gw_data = pd.read_pickle('gw_data.pickle')
     ace_data = pd.read_pickle('ace_data.pickle')
     
-    #data = pd.concat([gw_data, ace_data], axis=1)
-    data = gw_data
-    n = data.shape[1]
+    data = pd.concat([gw_data, ace_data], axis=1)
+    colors = {}
+    for i, j in zip(data.columns, plt.cm.jet(np.linspace(0.0, 1.0, data.shape[1]))):
+        colors[i] = j
+    
+    charities = ['dtw', 'sci', 'ss', 'cash', 'bednets', 'smc', 'iodine']
+    n = len(charities)
     N = 10000
     
-    t = data['bednets'].mean()
+    t = data['bednets'].median()
     
     # individual returns
-    p = data.mean().as_matrix()
+    p = data[charities].mean().as_matrix()
     #t = np.min(p)
-    s = data.apply(lambda x: downside_risk(x, t), axis=0).as_matrix()
+    s = data[charities].apply(lambda x: downside_risk(x, t), axis=0).as_matrix()
     #s = data.std().as_matrix()
     
     # random portfolios
@@ -78,7 +84,7 @@ if __name__ == '__main__':
     r = np.zeros(N)
     v = np.zeros(N)
     for j in range(N):
-        d = data.dot(x[j]).as_matrix()
+        d = data[charities].dot(x[j]).as_matrix()
         r[j] = np.mean(d)
         v[j] = downside_risk(d, t)
         #v[j] = np.std(d)
@@ -98,7 +104,8 @@ if __name__ == '__main__':
     rt = r[hull.vertices][it]
     xt = x[hull.vertices][it]
     
-    colors = plt.cm.viridis(np.linspace(0.0, 1.0, n))
+    #plt.rc('axes', prop_cycle=(cycler('color', colors)))
+    
     plt.figure(0, figsize=(8, 6))
     plt.axis([0.0, np.max(s)*1.1, 0.0, np.max(p)*1.1])
     #plt.axis([0.0, 10.0, 0.0, np.max(p)*1.1])
@@ -107,18 +114,31 @@ if __name__ == '__main__':
     plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'k-', label='optimal')
     plt.plot(vm[im0], rm[im0], 'wo', label='mvp', markersize=10)
     for j in range(n):
-        plt.plot(s[j], p[j], 'o', label=data.columns[j], color=colors[j], markersize=10)
+        c = charities[j]
+        plt.plot(s[j], p[j], 'o', label=c, color=colors[c], markersize=10)
     
     plt.legend(loc='best', ncol=3, numpoints=1)
-    plt.title('charity portfolios')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    plt.title('Charity portfolios')
+    plt.xlabel('Downside risk')
+    plt.ylabel('Cost effectiveness')
     
     plt.figure(1, figsize=(8, 6))
     plt.axis('equal')
-    patches, texts = plt.pie(xm, colors=colors, startangle=90)
+    patches, texts = plt.pie(xm, startangle=90, colors=[colors[o] for o in charities])
     plt.legend(patches, labels=['{} ({:2.1%})'.format(data.columns[i], xm[i]) for i in range(n)], loc='best')
-    #plt.title('Minimum variance portfolio')
+    plt.title('Minimum variance portfolio')
+    
+    plt.figure(2, figsize=(8, 6))
+    x = np.linspace(0.0, 25.0, 100)
+    for c in charities:
+        yh, xh = np.histogram(data[c], bins=x, density=True)    
+        plt.plot((xh[:-1] + xh[1:])/2.0, yh, label=c, color=colors[c], linewidth=2.0)
+    plt.xlim([np.min(x), np.max(x)])
+    plt.ylim([0.0, 1.0/3.0])
+    plt.xlabel('Cost effectiveness')
+    plt.ylabel('Probability')
+    plt.title('PDF of cost effectiveness')
+    plt.legend(loc='best')
     
     '''
     nf = 5
