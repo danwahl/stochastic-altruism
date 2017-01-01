@@ -63,7 +63,7 @@ if __name__ == '__main__':
     for i, j in zip(data.columns, plt.cm.jet(np.linspace(0.0, 1.0, data.shape[1]))):
         colors[i] = j
     
-    charities = ['dtw', 'sci', 'ss', 'cash', 'bednets', 'smc', 'iodine']
+    charities = ['dtw', 'sci', 'ss', 'cash', 'bednets', 'smc', 'ads', 'leaflets']
     n = len(charities)
     N = 10000
     
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     plt.figure(1, figsize=(8, 6))
     plt.axis('equal')
     patches, texts = plt.pie(xm, startangle=90, colors=[colors[o] for o in charities])
-    plt.legend(patches, labels=['{} ({:2.1%})'.format(data.columns[i], xm[i]) for i in range(n)], loc='best')
+    plt.legend(patches, labels=['{} ({:2.1%})'.format(charities[i], xm[i]) for i in range(n)], loc='best')
     plt.title('Minimum variance portfolio')
     
     plt.figure(2, figsize=(8, 6))

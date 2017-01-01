@@ -19,6 +19,8 @@ def get_rvs(p, n):
         return stats.uniform.rvs(loc=p['loc'], scale=p['scale'], size=n)
     elif p['dist'] == 'array':
         return np.random.choice(p['val'], n)
+        #loc, scale = stats.norm.fit(p['val'])
+        #return stats.norm.rvs(loc=loc, scale=scale, size=n)
     else:
         return p['val']
 

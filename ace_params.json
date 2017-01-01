@@ -101,9 +101,8 @@
                 "val": 2630.0
             }, 
             "brain": {
-                "loc": 2.6, 
-                "scale": 1.8000000000000003, 
-                "dist": "uniform"
+                "dist": "const", 
+                "val": 3.5
             }, 
             "AYLA": {
                 "loc": 1.27, 
@@ -180,9 +179,8 @@
                 "val": 2630.0
             }, 
             "brain": {
-                "loc": 2.6, 
-                "scale": 4.4, 
-                "dist": "uniform"
+                "dist": "const", 
+                "val": 3.5
             }, 
             "AYLA": {
                 "loc": 0.1245, 

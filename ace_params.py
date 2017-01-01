@@ -50,7 +50,7 @@ if __name__ == '__main__':
         'AYLA': {'dist': 'norm', 'loc': 0.1245, 'scale': 0.0048}, \
         'PED': {'dist': 'norm', 'loc': -0.14, 'scale': 0.07}, \
         'PES': {'dist': 'norm', 'loc': 0.2355, 'scale': 0.0818}, \
-        'brain': {'dist': 'uniform', 'loc': 2.6, 'scale': 4.4}, \
+        'brain': {'dist': 'const', 'val': 3.5}, \
         'body': {'dist': 'const', 'val': 2.63e3}, \
         'natural': {'dist': 'lognorm', 'shape': 7.0, 'scale': 2.0}, \
         'weight': {'dist': 'const', 'val': 0.72}
@@ -60,7 +60,7 @@ if __name__ == '__main__':
         'AYLA': {'dist': 'norm', 'loc': 1.27, 'scale': 0.14}, \
         'PED': {'dist': 'norm', 'loc': -0.225, 'scale': 0.0375}, \
         'PES': {'dist': 'norm', 'loc': 1.0, 'scale': 0.25}, \
-        'brain': {'dist': 'uniform', 'loc': 2.6, 'scale': (4.4 - 2.6)}, \
+        'brain': {'dist': 'const', 'val': 3.5}, \
         'body': {'dist': 'const', 'val': 2.63e3}, \
         'natural': {'dist': 'lognorm', 'shape': 10.0, 'scale': 2.0}, \
         'weight': {'dist': 'const', 'val': 1.0}
