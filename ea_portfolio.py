@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #from matplotlib.patches import Ellipse
 plt.style.use('ggplot')
 
-import random
+#import random
 
 #import cvxopt as opt
 #from cvxopt import solvers
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     #plt.axis([0.0, 10.0, 0.0, np.max(p)*1.1])
     plt.plot(v, r, '.', color='k', alpha=0.01)
     #plt.plot([0, vt], [0.0, rt], 'k-', label='tangency')
-    plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'k-', label='optimal')
+    #plt.plot(vm[im1:im0+1], rm[im1:im0+1], 'k-', label='optimal')
     plt.plot(vm[im0], rm[im0], 'wo', label='mvp', markersize=10)
     for j in range(n):
         c = charities[j]

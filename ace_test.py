@@ -55,9 +55,10 @@ if __name__ == '__main__':
     donations = params['Donations']
     
     for a in animals.keys():
-        # sentience and weight adjustment
+        # sentience and weight adjustment (set f = 1.0 for unweighted)
         animals[a]['eq'] = animals[a]['brain']['val']/(0.12*np.power(animals[a]['body']['val'], 2.0/3.0))  
-        animals[a]['f'] = animals[a]['weight']['val']*animals[a]['eq']/HUMAN_EQ             
+        animals[a]['f'] = animals[a]['weight']['val']*animals[a]['eq']/HUMAN_EQ
+        #animals[a]['f'] = 1.0 
         
         # cumulative elasticity factor
         animals[a]['CEF'] = {'dist': 'norm', 'loc': animals[a]['PES']['loc']/(animals[a]['PES']['loc'] - animals[a]['PED']['loc'])}
