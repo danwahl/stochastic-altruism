@@ -57,13 +57,17 @@ def downside_risk(x, t):
 if __name__ == '__main__':
     gw_data = pd.read_pickle('gw_data.pickle')
     ace_data = pd.read_pickle('ace_data.pickle')
+    lead_data = pd.read_pickle('lead_data.pickle')
     
     data = pd.concat([gw_data, ace_data], axis=1)
     colors = {}
     for i, j in zip(data.columns, plt.cm.jet(np.linspace(0.0, 1.0, data.shape[1]))):
         colors[i] = j
     
-    charities = ['dtw', 'sci', 'ss', 'cash', 'bednets', 'smc', 'ads', 'leaflets']
+    data = pd.concat([data, lead_data], axis=1)
+    colors['lead'] = 'gray'
+    
+    charities = ['dtw', 'sci', 'ss', 'cash', 'bednets', 'smc', 'ads', 'leaflets', 'lead']
     n = len(charities)
     N = 10000
     
